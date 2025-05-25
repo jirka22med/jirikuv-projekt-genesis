@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Osobní Stránka - Jiřík</title>
+    
+    
+    
+    <style>
+        /* Reset a základní styly */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 70px; /* Výška hlavičky, aby obsah nezačínal pod ní */
+            text-align: center;
+            /* Obsah bude zviditelněn přes JS po ověření uživatele */
+        }
+        
+          /*:root {
+            --header-bg-color: rgba(0,0,0,0.1); 
+            --text-color: white;
+            --border-color: rgba(255,255,255,0.2);
+            --secondary-text-color: rgba(255,255,255,0.8);
+            --nav-bg-color: rgba(0,0,0,0.3);
+        } */
+        
+        header {
+            background-color: var(--header-bg-color);
+
+
+
+            color: var(--text-color);
+
+
+
+            text-align: center;
+
+
+
+            padding: 2rem 1rem;
+
+
+
+            border-bottom: 1px solid var(--border-color);
+
+            margin-top: -40px;
+        }
+        header h1 {
+            font-size: 2.5em;
+
+            text-align: center;
+             margin-top: -45px;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1.1em;
+
+
+
+            color: var(--secondary-text-color);
+
+        }
+
+        nav {
+            background-color: var(--nav-bg-color);
+
+
+
+            padding: 0.5rem 0;
+
+
+
+            position: sticky;
+
+
+
+            top: 0;
+
+
+
+            z-index: 1000;
+
+
+
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #loading-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            z-index: 10000;
+            font-size: 1.1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        main {
+            padding: 2rem 0;
+            margin-top: 140px; 
+            min-height: calc(100vh - 140px - 70px);
+            margin-top: -20px;
+        }
+         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+             margin-top: -20px;
+        }
+
+        section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        section h2, section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        section h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+         section h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        #html-editor {
+            width: 100%;
+            height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            resize: vertical;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+
+        #html-preview {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .button, button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white !important; 
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            text-decoration: none; 
+            display: inline-block;
+        }
+        button:not(.button) { 
+        }
+
+        .button:hover, button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #42a5f5, #1e88e5);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ef5350, #e53935);
+        }
+
+        .gallery-controls {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #newImageUrl {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        #gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-image-wrapper {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background-color: #e0e0e0;
+        }
+
+        .gallery-image-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-image-wrapper img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            display: block;
+        }
+
+        .delete-img-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(220,53,69,0.8); 
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .delete-img-btn:hover {
+            background: #b02a37; 
+        }
+
+        .saved-code-item {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .saved-code-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+         .item-header h3 {
+            color: #667eea;
+            font-size: 1.25rem;
+            margin-bottom: 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .actions .button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        #links-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        #links-table th,
+        #links-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #links-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+        }
+        #links-table tr:nth-child(even) {
+             background-color: #fdfdff;
+        }
+        #links-table tr:hover td {
+            background-color: rgba(102, 126, 234, 0.1);
+        }
+
+        #links-table a {
+            color: #5a67d8;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+        #links-table a svg {
+             margin-right: 8px;
+             color: #5a67d8;
+        }
+
+        #links-table a:hover {
+            text-decoration: underline;
+            color: #434190;
+        }
+
+        .modal { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; 
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        }
+
+        .modal.visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal input[type="text"], .modal input[type="url"] { 
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+        .modal .modal-buttons { 
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        #image-modal { 
+            background: rgba(0,0,0,0.9);
+        }
+
+        #image-modal .modal-content {
+            background: transparent;
+            max-width: 90%;
+            max-height: 90%;
+            padding: 0;
+            box-shadow: none; 
+        }
+
+        #modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            display: block;
+            margin: auto;
+        }
+
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 600px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .modal-nav button {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 0.8rem; 
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem; 
+            width: 50px; 
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .modal-nav button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        footer {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            width: 100%;
+        }
+
+        #user-id-display { 
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem; 
+            color: white;
+            backdrop-filter: blur(5px);
+             -webkit-backdrop-filter: blur(5px);
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        #user-id-display span {
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0; 
+            }
+            header {
+                position: relative; 
+                padding: 1rem;
+            }
+            header h1 { font-size: 1.8rem; }
+            header p { font-size: 0.9rem; }
+
+            nav {
+                position: relative;
+                top: 0;
+                padding: 0.5rem 1rem;
+            }
+            .nav-container {
+                justify-content: center; 
+                gap: 0.5rem; 
+            }
+
+            .nav-link {
+                padding: 0.5rem 0.8rem; 
+                font-size: 0.85rem;
+            }
+            main {
+                margin-top: 0;
+                padding: 1rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+
+            section h1 {
+                font-size: 2rem;
+            }
+            section h2 {
+                font-size: 1.75rem;
+            }
+        }
+         @media (max-width: 480px) {
+             .nav-link {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+            }
+            #gallery-container {
+                grid-template-columns: 1fr; 
+            }
+            .button, button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .modal input[type="text"], .modal input[type="url"] {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body style="visibility: hidden;"> <div id="loading-indicator" class="hidden">Načítání...</div>
+
+    <header>
+        <h1>Vítejte na mé osobní stránce!</h1>
+        
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-link" data-section="about">O mně</a>
+            <a href="#" class="nav-link" data-section="portfolio">Portfolio</a>
+            <a href="#" class="nav-link" data-section="contacts">Kontakty</a>
+            <a href="#" class="nav-link" data-section="editor">HTML Editor</a>
+            <a href="#" class="nav-link" data-section="saved">Moje HTML kódy</a>
+            <a href="#" class="nav-link" data-section="gallery">Galerie</a>
+            <a href="#" class="nav-link" data-section="links">Odkazy</a>
+            <div id="data-management"></div>
+            <button onclick="signOut()">Odhlásit se</button> </div>
+    </nav>
+
+    <main>
+        <div class="container"> <section id="about">
+                <h2>O mně</h2>
+                <p><strong>Jiří Med – Milovník techniky a zábavy</strong></p>
+                <div>
+                    <h3>Co rád dělám o volných chvílích:</h3>
+                    <p><strong>Hraní počítačových her:</strong> Jsem fanoušek herního světa, kde se rád ponořím do různých virtuálních světů. Ať už je to akce, strategie nebo RPG, počítačové hry mě baví a pomáhají mi vypnout. Herní svět mi dává prostor pro dobrodružství, výzvy a rozvoj strategie.</p>
+
+                    <p><strong>Sledování YouTube videí:</strong> Když zrovna nehraju hry, užívám si sledování videí na YouTube. Zajímají mě herní let’s playe, technické novinky a videa oblíbených vloggerů, která mě inspirují a občas rozesmějí. YouTube je pro mě zábavou i zdrojem nových nápadů.</p>
+
+                </div>
+                <div>
+                    <h3>Další zájmy:</h3>
+                    <p><strong>Star Trek:</strong> Moje vášeň pro sci-fi svět Star Treku je obrovská. Miluju tento seriál i jeho postavy, které mě provázejí už od dětství. Vlastním projekt věnovaný Star Treku, kde kombinuji svou lásku k tomuto univerzu s technickými znalostmi. Futuristické technologie a warpové efekty jsou pro mě fascinující, a dokonce jsem je začlenil do svého webového projektu.</p>
+
+                    <p><strong>Technika a kódování:</strong> Jsem nadšenec do technologií a rád pracuju na různých technických výzvách. Programování a úprava HTML a CSS jsou mojí vášní, protože mě baví vytvářet funkční a esteticky krásné webové stránky. Mám cit pro detail a rád kombinuju moderní design s inovativními funkcemi.</p>
+                </div>
+                <div>
+                    <h3>Styl života:</h3>
+                    <p>Rád trávím čas u počítače, ať už při hraní, tvorbě webů nebo sledování videí. Miluju barevné LED pásky a osvětlení, které bliká do rytmu hudby, což přináší skvělou atmosféru do mého prostoru. Tato kombinace techniky a estetiky mi dodává inspiraci a vytváří místo, kde se cítím dobře.</p>
+                </div>
+            </section>
+
+            <section id="portfolio">
+                <h2>Portfolio</h2>
+                <p>V této sekci najdeš ukázky mých projektů a práce, které odrážejí mé zájmy v oblasti technologií. I když nejsem programátor, díky spolupráci s AI, jako je ChatGPT a Claude.AI, se mi podařilo vytvořit tyto projekty, na které jsem pyšný.</p>
+                <div class="portfolio-items" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
+                        <h3>Star Trek Webový Projekt</h3>
+                        <p>Tento projekt je věnován mému oblíbenému sci-fi seriálu Star Trek. Díky pomoci od chatbotů ChatGPT a Claude.AI jsem vytvořil interaktivní webovou stránku s animacemi warp pohonu, seznamy postav a klíčovými momenty ze všech sérií. Stránka je responzivní a přizpůsobí se jakémukoli zařízení, což navozuje pocit, jako bys byl přímo ve vesmíru.</p>
+                        <a href="https://jirka22med.github.io/star-trek-universe/" class="button">Zobrazit projekt &rarr;</a>
+                    </div>
+                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
+                        <h3>Audio a LED projekty</h3>
+                        <p>Tento projekt je skvělým příkladem mého praktického přístupu k technice. Vzal jsem dva reproduktory Lamax Storm 1, které jsem rozebral, a odpojil jsem u nich jeden z malých vnitřních reproduktorů...</p>
+
+                        <p>Celý systém je postaven na jednoduchém principu: zvukové signály, které normálně pohánějí reproduktory, jsou přesměrovány tak, aby poháněly osvětlení...</p>
+                        <a href="#" class="button">Více o projektu &rarr;</a>
+                    </div>
+                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
+                        <h3>Webový design a kódování</h3>
+                        <p>I když se nepovažuji za programátora, díky AI jsem zvládl tvorbu responzivních webových stránek s moderním designem. Mám několik projektů, které využívají HTML, CSS a JavaScript, a které mi pomohla vytvořit umělá inteligence.</p>
+                        <a href="#" class="button">Prohlédnout si ukázky &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacts">
+                <h2>Kontakty</h2>
+                <p>Zde můžete přidat své kontaktní údaje, jako je e-mail, odkazy na sociální sítě (např. Discord, GitHub) nebo jiné způsoby, jak vás mohou lidé oslovit.</p>
+                <div class="contact-details" style="margin-top: 1rem;">
+                    <p><strong>E-mail:</strong> <a href="mailto:tvuj.email@example.com">tvuj.email@example.com</a></p>
+                    <p><strong>Discord:</strong> TvojeJmeno#1234</p>
+                </div>
+                <div id="user-id-display" class="hidden">Vaše User ID: <span id="firebase-user-id"></span></div> </section>
+
+            <section id="editor">
+                <h2>HTML Editor</h2>
+                <div class="editor-container"> <div>
+                        <label for="html-editor">HTML Kód:</label>
+                        <textarea id="html-editor" placeholder="Zde pište svůj HTML kód..."></textarea>
+                    </div>
+                    <div>
+                        <label for="html-preview">Náhled:</label>
+                        <iframe id="html-preview"></iframe>
+                    </div>
+                </div>
+                <button id="save-code-btn">Uložit kód</button>
+            </section>
+
+            <section id="saved">
+                <h2>Moje HTML kódy</h2>
+                <div id="saved-codes-list">
+                    <p>Načítání uložených kódů...</p>
+                </div>
+            </section>
+
+            <section id="gallery">
+                <h2>Galerie</h2>
+                <div class="gallery-controls">
+                     <input type="url" id="newImageUrl" placeholder="Vložte URL adresu obrázku...">
+                     <button id="addImageUrlBtn" class="button">Přidat obrázek</button>
+                </div>
+                <div id="gallery-container">
+                    <p>Načítání obrázků...</p>
+                </div>
+            </section>
+
+            <section id="links">
+                <h2>Externí Odkazy</h2>
+                <table id="links-table">
+                    <thead>
+                        <tr>
+                            <th>Ikona</th>
+                            <th>Název odkazu</th>
+                            <th>Adresa URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </section>
+        </div> </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Jiří Med. Všechna práva vyhrazena.</p>
+        <p>Inspirováno technologiemi a budoucností.</p>
+    </footer>
+
+    <div id="image-modal" class="modal"> <div class="modal-content">
+            <img id="modal-img" src="" alt="Zvětšený obrázek">
+            <div class="modal-nav"> <button id="prev-image-btn" class="button btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                    Předchozí
+                </button>
+                <button id="close-modal-btn" class="button btn-danger">Zavřít</button>
+                <button id="next-image-btn" class="button btn-secondary">
+                    Další
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="save-code-modal" class="modal">
+        <div class="modal-content">
+            <h3>Uložit HTML kód</h3>
+            <label for="code-title-input">Název kódu:</label>
+            <input type="text" id="code-title-input" placeholder="Např. Můj úžasný snippet">
+            <div class="modal-buttons">
+                <button id="cancel-save-code-btn" class="button btn-secondary">Zrušit</button>
+                <button id="confirm-save-code-btn" class="button">Uložit</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="alert-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="alert-modal-title">Upozornění</h3>
+            <p id="alert-modal-message"></p>
+            <div class="modal-buttons">
+                <button id="alert-modal-ok-btn" class="button">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="confirm-modal-title">Potvrzení</h3>
+            <p id="confirm-modal-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-modal-cancel-btn" class="button btn-secondary">Zrušit</button>
+                <button id="confirm-modal-ok-btn" class="button btn-danger">Potvrdit</button>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    // --- Supabase Konstanty ---
+    const SUPABASE_URL = 'https://aknjpurxdbtsxillmqbd.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrbmpwdXJ4ZGJ0c3hpbGxtcWJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEzMzAsImV4cCI6MjA2Mzc2NzMzMH0.otk-74BBM-SwC_zA0WqqcwGVab5lBfrLiyeYOmh4Xio';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingIndicatorElement = document.getElementById('loading-indicator');
+
+        // Zobrazíme indikátor načítání hned na začátku
+        if (loadingIndicatorElement) {
+            loadingIndicatorElement.textContent = "Ověřování uživatele...";
+            loadingIndicatorElement.classList.remove('hidden');
+        } else {
+            console.error("Loading indicator element not found!");
+        }
+        
+        // Zkontrolujeme, zda je knihovna Supabase načtena
+        if (typeof supabase === 'undefined' || typeof supabase.createClient !== 'function') {
+            console.error('Supabase library not loaded or createClient is not a function.');
+            if (loadingIndicatorElement) {
+                loadingIndicatorElement.textContent = 'Kritická chyba: Knihovna Supabase se nenačetla.';
+            }
+            document.body.style.visibility = 'visible'; // Zobrazíme tělo, aby byla vidět chybová hláška
+            // Můžeš zde přidat zobrazení chyby přímo na stránce, pokud loadingIndicator není dostatečný
+            return;
+        }
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Globální funkce pro odhlášení (pro onclick atribut)
+        window.signOut = async function() {
+            if (loadingIndicatorElement) {
+                loadingIndicatorElement.textContent = "Odhlašování...";
+                loadingIndicatorElement.classList.remove('hidden');
+            }
+            document.body.style.visibility = 'hidden';
+
+            const { error } = await supabaseClient.auth.signOut();
+            if (error) {
+                console.error('Chyba při odhlašování:', error.message);
+                if (window.showAlertModal) showAlertModal("Chyba odhlášení", `Nepodařilo se odhlásit: ${error.message}`);
+                else alert(`Chyba odhlášení: ${error.message}`);
+                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
+                document.body.style.visibility = 'visible'; // Zobrazit tělo, i když odhlášení selhalo, aby uživatel nebyl zaseknutý
+            } else {
+                window.location.replace('login.html'); // Použij replace pro lepší historii
+            }
+        }
+
+        // Sledování změn stavu přihlášení
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            console.log('Supabase Auth State Change:', event, session);
+            if (event === 'SIGNED_OUT') {
+                // Pokud je uživatel odhlášen, přesměruj na login.html
+                // Toto se může stát i v jiné záložce, proto je důležité.
+                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') { // Zabráníme nekonečnému přesměrování, pokud jsme již na login/signup
+                    window.location.replace('login.html');
+                }
+            } else if (event === 'SIGNED_IN') {
+                // Pokud se uživatel přihlásí (např. v jiné záložce) a je na login stránce, přesměrujeme ho
+                if (window.location.pathname === '/login.html' || window.location.pathname === '/signup.html') {
+                     window.location.replace('index.html'); // Předpokládáme, že toto je hlavní stránka
+                }
+                // Aktualizace User ID, pokud je zobrazeno
+                const userIdDisplaySpan = document.getElementById('firebase-user-id');
+                const userIdContainer = document.getElementById('user-id-display');
+                if (session && session.user && userIdDisplaySpan && userIdContainer) {
+                    userIdDisplaySpan.textContent = session.user.id;
+                    userIdContainer.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Hlavní funkce pro kontrolu uživatele a inicializaci aplikace
+        async function checkUserAndThenInitializeApp() {
+            const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+            if (error) {
+                console.error("Chyba při získávání session:", error);
+                if (loadingIndicatorElement) {
+                    loadingIndicatorElement.textContent = `Chyba ověření: ${error.message}. Zkuste obnovit.`;
+                }
+                document.body.style.visibility = 'visible'; // Zobrazíme tělo pro chybovou hlášku
+                return; // Necháme uživatele na stránce s chybou v indikátoru
+            }
+
+            if (!session) {
+                // Uživatel není přihlášen, přesměrujeme na login.html
+                // Ujisti se, že 'login.html' existuje ve stejném adresáři nebo uprav cestu
+                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') {
+                    window.location.replace('login.html');
+                } else {
+                    // Pokud jsme již na login/signup stránce a není session, nic neděláme, necháme uživatele se přihlásit/registrovat
+                    if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
+                    document.body.style.visibility = 'visible';
+                }
+            } else {
+                // Uživatel je přihlášen
+                console.log('Uživatel je přihlášen:', session.user.email);
+                document.body.style.visibility = 'visible'; // Zobrazíme obsah stránky
+
+                // Inicializujeme zbytek aplikace
+                initializeApp(); // Tvá stávající funkce pro inicializaci obsahu
+
+                // Zobrazíme User ID
+                const userIdDisplaySpan = document.getElementById('firebase-user-id'); // Používáš toto ID
+                const userIdContainer = document.getElementById('user-id-display');
+                if (userIdDisplaySpan && userIdContainer) {
+                    userIdDisplaySpan.textContent = session.user.id; // Můžeš zobrazit i session.user.email
+                    userIdContainer.classList.remove('hidden');
+                }
+                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden'); // Skryjeme indikátor načítání
+            }
+        }
+
+        // Spustíme proces ověření a inicializace
+        checkUserAndThenInitializeApp();
+    });
+
+    // --- Zde začíná tvůj původní kód (globální proměnné a funkce) ---
+    let activeSection = 'about'; 
+    let galleryImagesData = [];
+    let savedCodesData = [];
+    let currentModalImageIndex = 0; 
+    // const loadingIndicator = document.getElementById('loading-indicator'); // Již definováno výše jako loadingIndicatorElement
+
+    const STORAGE_KEYS = {
+        GALLERY_IMAGES: 'portfolio_gallery_images',
+        SAVED_CODES: 'portfolio_saved_codes',
+        EXTERNAL_LINKS: 'portfolio_external_links'
+    };
+
+    const initialImageUrls = [ 
+        { id: 'initial-1', url: 'https://img.freepik.com/free-photo/futuristic-background-with-colorful-abstract-design_1340-39 futuristic-technology-background-with-neon-lights_76964-11458.jpg?w=826&t=st=1716545000~exp=1716545600~hmac=e6108f60104301f3b2886131029b0f10151707f3020142e9950b1e22704c654a', name: 'Technologie'},
+
+  { id: 'initial-2', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k18.jpg?ver=0', name: 'Srdce'},
+
+  { id: 'initial-3', url: 'https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=1060&t=st=1716545052~exp=1716545652~hmac=c6a7d107b56da6822f221372f4476a3793075997b820160f494a887688068b14', name: 'Vesmírná loď'},
+
+  { id: 'initial-4', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k7.jpg?ver=0', name: 'Mlhovina'},
+
+  { id: 'initial-5', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k8.jpg?ver=0', name: 'Kyberpunk město'},
+
+  { id: 'initial-6', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k13.jpg?ver=0', name: 'Notebook v akci'},
+
+  { id: 'initial-7', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k14.jpg?ver=0', name: 'Galaxie'},
+
+  { id: 'initial-8', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1920x10804.jpg?ver=0', name: 'Lidský mozek'},
+
+  { id: 'initial-9', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_15360x86402.jpg?ver=0', name: 'Vědecké laboratoře'},
+
+  { id: 'initial-10', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/misurina-sunset.jpg?ver=0', name: 'Neuronová síť'},
+
+  { id: 'initial-11', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/snowy-landscape-with-mountains-lake-with-snow-ground.jpg?ver=0', name: 'Datová mřížka'},
+
+  { id: 'initial-12', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/wet-sphere-reflective-water-abstract-beauty-generated-by-ai.jpg?ver=0', name: 'Futuristické město'},
+
+  { id: 'initial-13', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/vnon-pozadi-od-admirala-chatbota..jpg?ver=0', name: 'Světelná geometrie'},
+
+  { id: 'initial-14', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1024x1792.jpg?ver=0', name: 'Digitální plameny'},
+
+  { id: 'initial-15', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_300x3001_2.jpg?ver=0', name: 'Exoplaneta'},
+
+  { id: 'initial-16', url: 'https://img36.rajce.idnes.cz/d3603/10/10185/10185286_0147349ad505c43a2d9f6eb372624417/images/CIMG0039.jpg?ver=3', name: 'Kybernetická maska'},
+    ];
+
+    let externalLinksData = [
+        { title: 'Claude AI', url: 'https://claude.ai/' }, { title: 'SledujSerialy', url: 'https://sledujserialy.sx/' },
+
+    { title: 'Kukaj.me', url: 'https://serial.kukaj.me/' }, { title: 'ProSebe.cz', url: 'https://prosebe.cz/user/project' },
+
+    { title: 'Populace.cz', url: 'https://www.populace.cz' }, { title: 'My-Map.eu', url: 'https://www.my-map.eu/odmeny' },
+
+    { title: 'Národní Panel', url: 'https://www.narodnipanel.cz/?backlink=expx2' }, { title: 'Lifepoints Panel', url: 'https://app.lifepointspanel.com/en-US/login' },
+
+    { title: 'Voyo', url: 'https://voyo.nova.cz/' }, { title: 'Přehraj.to', url: 'https://prehrajto.cz/' },
+
+    { title: 'SledovaniTV.cz', url: 'https://sledovanitv.cz/' }, { title: 'Bombuj', url: 'https://www.bombuj.si/' },
+    ];
+
+    function saveToLocalStorage(key, data) {
+        try {
+            localStorage.setItem(key, JSON.stringify(data));
+            return true;
+        } catch (error) {
+            console.error('Chyba při ukládání do localStorage:', error);
+            if (window.showAlertModal) showAlertModal("Chyba ukládání", "Nepodařilo se uložit data do trvalého úložiště. Možná je úložiště plné.");
+            else alert("Chyba ukládání do localStorage.");
+            return false;
+        }
+    }
+
+    function loadFromLocalStorage(key, defaultValue = []) {
+        try {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : defaultValue;
+        } catch (error) {
+            console.error('Chyba při načítání z localStorage:', error);
+            return defaultValue;
+        }
+    }
+
+    function clearLocalStorageData() {
+        try {
+            Object.values(STORAGE_KEYS).forEach(key => {
+                localStorage.removeItem(key);
+            });
+            if (window.showAlertModal) showAlertModal("Data vymazána", "Všechna uložená data byla úspěšně vymazána z trvalého úložiště.");
+            else alert("Data vymazána.");
+            loadDataFromStorage(); // Obnovení výchozích dat
+            return true;
+        } catch (error) {
+            console.error('Chyba při mazání localStorage dat:', error);
+            if (window.showAlertModal) showAlertModal("Chyba", "Nepodařilo se vymazat všechna data.");
+            else alert("Chyba při mazání dat.");
+            return false;
+        }
+    }
+
+    function loadDataFromStorage() {
+        const savedImages = loadFromLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, []);
+        galleryImagesData = savedImages.length > 0 ? savedImages : [...initialImageUrls];
+        
+        savedCodesData = loadFromLocalStorage(STORAGE_KEYS.SAVED_CODES, []);
+        
+        const savedLinks = loadFromLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, []);
+        externalLinksData = savedLinks.length > 0 ? savedLinks : externalLinksData; // Zachováme default, pokud nic není uloženo
+    }
+
+    function initializeApp() {
+        // showLoading je nyní řešeno v checkUserAndThenInitializeApp a na začátku DOMContentLoaded
+        // Pokud initializeApp něco vizuálně mění, co by mělo být až po načtení, je to zde správně.
+        setupNavigation();
+        setupHtmlEditor();
+        setupGallery();
+        setupDataManagement();
+        
+        loadDataFromStorage(); // Načtení dat by mělo proběhnout před renderováním
+        
+        renderExternalLinks(); 
+        updateGalleryDisplay();
+        renderSavedCodesDisplay();
+
+        const currentYearEl = document.getElementById('currentYear');
+        if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+        
+        showSection(activeSection, true); 
+        console.log("Aplikace inicializována.");
+        // hideLoading je voláno v checkUserAndThenInitializeApp po úspěšném přihlášení a inicializaci
+    }
+
+    // Funkce showLoading a hideLoading jsou nyní volány primárně v kontextu ověření
+    // Můžeš je stále používat i jinde, pokud potřebuješ
+    function showLoading(message = "Načítání...") {
+        const loadingIndicatorElement = document.getElementById('loading-indicator');
+        if (loadingIndicatorElement) {
+            loadingIndicatorElement.textContent = message;
+            loadingIndicatorElement.classList.remove('hidden');
+        }
+    }
+    function hideLoading() {
+        const loadingIndicatorElement = document.getElementById('loading-indicator');
+        if (loadingIndicatorElement) {
+            loadingIndicatorElement.classList.add('hidden');
+        }
+    }
+
+    function setupDataManagement() {
+        const dataManagementContainer = document.getElementById('data-management');
+        if (dataManagementContainer) {
+            dataManagementContainer.innerHTML = `
+                <div class="data-management-buttons" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 0.5rem;">
+                    <button id="save-all-data-btn" class="button btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">💾 Uložit vše</button>
+                    <button id="clear-all-data-btn" class="button btn-danger" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🗑️ Vymazat vše</button>
+                    <button id="export-data-btn" class="button btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">📤 Export</button>
+                    <button id="import-data-btn" class="button btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">📥 Import</button>
+                    <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                </div>
+            `;
+            
+            document.getElementById('save-all-data-btn')?.addEventListener('click', saveAllDataToStorage);
+            document.getElementById('clear-all-data-btn')?.addEventListener('click', handleClearAllData);
+            document.getElementById('export-data-btn')?.addEventListener('click', exportData);
+            document.getElementById('import-data-btn')?.addEventListener('click', () => {
+                document.getElementById('import-file-input')?.click();
+            });
+            document.getElementById('import-file-input')?.addEventListener('change', handleImportData);
+        }
+    }
+
+    function saveAllDataToStorage() {
+        let savedCount = 0;
+        if (saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData)) savedCount++;
+        if (saveToLocalStorage(STORAGE_KEYS.SAVED_CODES, savedCodesData)) savedCount++;
+        if (saveToLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, externalLinksData)) savedCount++;
+        
+        const message = savedCount === 3 ? "Všechna data byla úspěšně uložena." : `Uloženo ${savedCount} ze 3 kategorií dat.`;
+        if (window.showAlertModal) showAlertModal(savedCount === 3 ? "Data uložena" : "Částečné uložení", message);
+        else alert(message);
+    }
+
+    async function handleClearAllData() {
+        const confirmed = await (window.showConfirmModal ? 
+            showConfirmModal("Vymazat všechna data?", "Opravdu chcete vymazat všechna uložená data? Tato akce je nevratná!", { okText: 'Ano, vymazat', cancelText: 'Zrušit' }) :
+            confirm("Opravdu chcete vymazat všechna uložená data?")
+        );
+        
+        if (confirmed) {
+            clearLocalStorageData(); // Tato funkce již volá loadDataFromStorage a aktualizuje UI
+            updateGalleryDisplay();    // Pro jistotu explicitně
+            renderSavedCodesDisplay();
+            renderExternalLinks();
+        }
+    }
+
+    function exportData() {
+        const exportObject = {
+            galleryImages: galleryImagesData,
+            savedCodes: savedCodesData,
+            externalLinks: externalLinksData,
+            exportDate: new Date().toISOString(),
+            version: "1.0"
+        };
+        
+        const dataStr = JSON.stringify(exportObject, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `portfolio-data-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        if(window.showAlertModal) showAlertModal("Export dokončen", "Data byla exportována do souboru JSON.");
+        else alert("Data exportována.");
+    }
+
+    function handleImportData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+                const confirmed = await (window.showConfirmModal ?
+                    showConfirmModal("Importovat data?", "Importování přepíše všechna současná data. Chcete pokračovat?", { okText: 'Ano, importovat', cancelText: 'Zrušit' }) :
+                    confirm("Importování přepíše data. Pokračovat?")
+                );
+                
+                if (confirmed) {
+                    if (importedData.galleryImages) galleryImagesData = importedData.galleryImages;
+                    if (importedData.savedCodes) savedCodesData = importedData.savedCodes;
+                    if (importedData.externalLinks) externalLinksData = importedData.externalLinks;
+                    
+                    saveAllDataToStorage(); // Uloží naimportovaná data
+                    
+                    updateGalleryDisplay();
+                    renderSavedCodesDisplay();
+                    renderExternalLinks();
+                    
+                    if(window.showAlertModal) showAlertModal("Import dokončen", "Data byla úspěšně naimportována a uložena.");
+                    else alert("Data naimportována.");
+                }
+            } catch (error) {
+                console.error('Chyba při importu:', error);
+                if(window.showAlertModal) showAlertModal("Chyba importu", "Nepodařilo se načíst data ze souboru.");
+                else alert("Chyba importu dat.");
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = ''; // Vyčištění inputu
+    }
+
+    function setupNavigation() {
+        const navLinks = document.querySelectorAll('.nav-container a.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.dataset.section;
+                showSection(sectionId);
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+        const initialActiveLink = document.querySelector(`.nav-container a.nav-link[data-section="${activeSection}"]`);
+        if (initialActiveLink) initialActiveLink.classList.add('active');
+    }
+
+    function showSection(id, isInitial = false) {
+        if (!id) id = 'about';
+        activeSection = id;
+        document.querySelectorAll('main section').forEach(section => {
+            section.classList.remove('active'); 
+            if (!(isInitial && section.id === id)) {
+                section.style.display = 'none'; 
+            }
+        });
+        const sectionElement = document.getElementById(id);
+        if (sectionElement) {
+            sectionElement.style.display = 'block'; 
+            setTimeout(() => sectionElement.classList.add('active'), 10); 
+        } else {
+            console.warn(`Sekce s ID "${id}" nebyla nalezena. Zobrazuji 'about'.`);
+            const aboutSection = document.getElementById('about');
+            if(aboutSection) {
+                aboutSection.style.display = 'block';
+                setTimeout(() => aboutSection.classList.add('active'), 10);
+                activeSection = 'about';
+                document.querySelectorAll('.nav-container a.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector('.nav-container a.nav-link[data-section="about"]')?.classList.add('active');
+            }
+        }
+    }
+
+    function setupHtmlEditor() {
+        const editor = document.getElementById('html-editor');
+        const preview = document.getElementById('html-preview');
+        const saveBtn = document.getElementById('save-code-btn');
+        
+        if (!editor || !preview || !saveBtn) {
+            console.error("HTML editor elementy nebyly nalezeny!");
+            return;
+        }
+
+        editor.addEventListener('input', () => { preview.srcdoc = editor.value; });
+        preview.srcdoc = editor.value;
+
+        saveBtn.addEventListener('click', () => {
+            if (!editor.value.trim()) {
+                if(window.showAlertModal) showAlertModal("Prázdný kód", "Nelze uložit prázdný HTML kód.");
+                else alert("Nelze uložit prázdný kód.");
+                return;
+            }
+            const saveModal = document.getElementById('save-code-modal');
+            if(saveModal) showModal(saveModal);
+            document.getElementById('code-title-input')?.focus();
+        });
+    }
+
+    function saveHtmlCodeLocally(title, code) {
+        const newCode = { 
+            id: `local-code-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+            title, code, createdAt: new Date().toISOString() 
+        };
+        savedCodesData.unshift(newCode);
+        saveToLocalStorage(STORAGE_KEYS.SAVED_CODES, savedCodesData);
+        renderSavedCodesDisplay();
+        if(window.showAlertModal) showAlertModal("Kód uložen", `Kód "${title}" byl trvale uložen.`);
+        else alert(`Kód "${title}" uložen.`);
+    }
+
+    function deleteHtmlCodeLocally(id) {
+        savedCodesData = savedCodesData.filter(code => code.id !== id);
+        saveToLocalStorage(STORAGE_KEYS.SAVED_CODES, savedCodesData);
+        renderSavedCodesDisplay();
+    }
+
+    function renderSavedCodesDisplay() {
+        const listEl = document.getElementById('saved-codes-list');
+        if(!listEl) return;
+        listEl.innerHTML = savedCodesData.length === 0 ? '<p>Žádné kódy nejsou aktuálně uloženy.</p>' : '';
+        
+        savedCodesData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'saved-code-item';
+            div.innerHTML = `
+                <div class="item-header">
+                    <h3>${item.title}</h3>
+                    <div class="actions">
+                        <button class="button btn-secondary load-code">Načíst</button>
+                        <button class="button btn-danger delete-code">Smazat</button>
+                    </div>
+                </div>
+                <p>Uloženo: ${new Date(item.createdAt).toLocaleString('cs-CZ')}</p>
+            `;
+            div.querySelector('.load-code').addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                document.getElementById('html-editor').value = item.code;
+                document.getElementById('html-preview').srcdoc = item.code;
+                showSection('editor'); 
+                document.querySelector('.nav-container a.nav-link[data-section="editor"]')?.click();
+            });
+            div.querySelector('.delete-code').addEventListener('click', async (e) => {
+                e.stopPropagation(); 
+                const confirmed = await (window.showConfirmModal ? 
+                    showConfirmModal("Smazat kód?", `Opravdu chcete smazat kód "${item.title}"?`) :
+                    confirm(`Smazat kód "${item.title}"?`)
+                );
+                if (confirmed) deleteHtmlCodeLocally(item.id);
+            });
+            div.addEventListener('click', () => { 
+                document.getElementById('html-editor').value = item.code;
+                document.getElementById('html-preview').srcdoc = item.code;
+                showSection('editor');
+                document.querySelector('.nav-container a.nav-link[data-section="editor"]')?.click();
+            });
+            listEl.appendChild(div);
+        });
+    }
+
+    function setupGallery() {
+        // Přesunuto do HTML pro galerii: <input type="url" id="newImageUrl"...>, <button id="addImageUrlBtn"...>
+        const addBtn = document.getElementById('addImageUrlBtn');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const prevBtn = document.getElementById('prev-image-btn');
+        const nextBtn = document.getElementById('next-image-btn');
+
+        if(addBtn) addBtn.addEventListener('click', handleAddImageUrl); // Kontrola existence addBtn
+        if(closeBtn) closeBtn.addEventListener('click', closeImageModal);
+        if(prevBtn) prevBtn.addEventListener('click', () => navigateImageModal(-1));
+        if(nextBtn) nextBtn.addEventListener('click', () => navigateImageModal(1));
+    }
+
+    async function handleAddImageUrl() {
+        const urlInput = document.getElementById('newImageUrl');
+        if (!urlInput) {
+            console.error("Element #newImageUrl not found for adding gallery image.");
+            return;
+        }
+        const imageUrl = urlInput.value.trim();
+
+        if (imageUrl && isValidHttpUrl(imageUrl)) {
+            const imageNamePrompt = prompt(`Zadejte název pro obrázek (URL: ${imageUrl.substring(0,50)}...). Prázdné pro výchozí název.`, `Obrázek ${galleryImagesData.length + 1}`);
+            let imageName = (imageNamePrompt && imageNamePrompt.trim() !== "") ? imageNamePrompt.trim() : `Obrázek ${galleryImagesData.length + 1}_${Math.floor(Math.random()*1000)}`;
+            
+            const newImage = {
+                id: `local-img-${Date.now()}-${Math.random().toString(36).substr(2,5)}`,
+                url: imageUrl, name: imageName, createdAt: new Date().toISOString()
+            };
+            galleryImagesData.unshift(newImage);
+            saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData);
+            updateGalleryDisplay();
+            if(window.showAlertModal) showAlertModal("Obrázek přidán", `Obrázek "${imageName}" byl uložen.`);
+            else alert(`Obrázek "${imageName}" uložen.`);
+            urlInput.value = ''; 
+        } else {
+            if(window.showAlertModal) showAlertModal("Neplatná URL", "Zadejte platnou URL adresu obrázku (http:// nebo https://).");
+            else alert("Neplatná URL.");
+        }
+    }
+
+    function isValidHttpUrl(string) {
+        let url; 
+        try { url = new URL(string); } 
+        catch (_) { return false; }
+        return url.protocol === "http:" || url.protocol === "https:";
+    }
+
+    async function deleteGalleryImageLocally(id) {
+        const imageToDelete = galleryImagesData.find(img => img.id === id);
+        if (!imageToDelete) return;
+
+        const confirmed = await (window.showConfirmModal ?
+            showConfirmModal("Smazat obrázek?", `Opravdu smazat "${imageToDelete.name || 'tento obrázek'}"?`) :
+            confirm(`Smazat obrázek "${imageToDelete.name || 'tento obrázek'}"?`)
+        );
+        if (confirmed) {
+            galleryImagesData = galleryImagesData.filter(img => img.id !== id);
+            saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData);
+            updateGalleryDisplay();
+        }
+    }
+
+    function updateGalleryDisplay() {
+        const container = document.getElementById('gallery-container');
+        if(!container) return;
+        container.innerHTML = galleryImagesData.length === 0 ? '<p>Galerie je prázdná.</p>' : '';
+
+        galleryImagesData.forEach((imgData, index) => {
+            const div = document.createElement('div');
+            div.className = 'gallery-image-wrapper';
+            div.innerHTML = `
+                <img src="${imgData.url}" alt="${imgData.name || 'Obrázek z galerie'}" onerror="this.onerror=null;this.src='https://placehold.co/250x200/cccccc/ffffff?text=Obrázek+nelze+načíst';this.alt='Obrázek nelze načíst';">
+                <button class="delete-img-btn" title="Smazat obrázek">&times;</button>
+            `;
+            div.querySelector('img').addEventListener('click', () => openImageModal(index));
+            div.querySelector('.delete-img-btn').addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                deleteGalleryImageLocally(imgData.id);
+            });
+            container.appendChild(div);
+        });
+    }
+
+    function openImageModal(index) {
+        if (index < 0 || index >= galleryImagesData.length) return;
+        currentModalImageIndex = index;
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        if(!modal || !modalImg) return;
+
+        modalImg.src = galleryImagesData[index].url;
+        modalImg.alt = galleryImagesData[index].name || 'Zvětšený obrázek';
+        showModal(modal);
+    }
+
+    function closeImageModal() {
+        hideModal(document.getElementById('image-modal'));
+    }
+
+    function navigateImageModal(direction) {
+        const newIndex = currentModalImageIndex + direction;
+        if (newIndex >= 0 && newIndex < galleryImagesData.length) {
+            openImageModal(newIndex); 
+        } else if (galleryImagesData.length > 0) { 
+            currentModalImageIndex = (newIndex < 0) ? galleryImagesData.length - 1 : 0;
+            openImageModal(currentModalImageIndex);
+        }
+    }
+
+    function renderExternalLinks() {
+        const tableBody = document.querySelector('#links-table tbody');
+        if (!tableBody) {
+            console.error("Table body for links not found!");
+            return;
+        }
+        tableBody.innerHTML = ''; 
+
+        if (externalLinksData.length === 0) {
+            const row = tableBody.insertRow();
+            const cell = row.insertCell();
+            cell.colSpan = 3; 
+            cell.textContent = 'Žádné externí odkazy k zobrazení.';
+            cell.style.textAlign = 'center';
+            return;
+        }
+
+        externalLinksData.forEach(link => {
+            const row = tableBody.insertRow();
+            row.insertCell().innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
+            
+            const titleCell = row.insertCell();
+            const anchor = document.createElement('a');
+            anchor.href = link.url;
+            anchor.target = "_blank";
+            anchor.rel = "noopener noreferrer";
+            anchor.textContent = link.title;
+            titleCell.appendChild(anchor);
+            
+            row.insertCell().textContent = link.url;
+        });
+    }
+
+    function showModal(modalElement) {
+        if(modalElement) modalElement.classList.add('visible');
+    }
+    function hideModal(modalElement) {
+        if(modalElement) modalElement.classList.remove('visible');
+    }
+
+    const saveCodeModalEl = document.getElementById('save-code-modal');
+    const codeTitleInputEl = document.getElementById('code-title-input');
+    const confirmSaveCodeBtnEl = document.getElementById('confirm-save-code-btn');
+    const cancelSaveCodeBtnEl = document.getElementById('cancel-save-code-btn');
+
+    if(confirmSaveCodeBtnEl && codeTitleInputEl) { 
+        confirmSaveCodeBtnEl.addEventListener('click', () => {
+            const title = codeTitleInputEl.value.trim();
+            const editor = document.getElementById('html-editor');
+            const code = editor ? editor.value : ''; 
+            if (title && code) {
+                saveHtmlCodeLocally(title, code); 
+                if(saveCodeModalEl) hideModal(saveCodeModalEl);
+                codeTitleInputEl.value = '';
+            } else {
+                if(window.showAlertModal) showAlertModal("Chybějící údaje", "Zadejte název a ujistěte se, že kód není prázdný.");
+                else alert("Chybí název nebo kód.");
+            }
+        });
+    }
+    if(cancelSaveCodeBtnEl) cancelSaveCodeBtnEl.addEventListener('click', () => {
+        if(saveCodeModalEl) hideModal(saveCodeModalEl);
+        if(codeTitleInputEl) codeTitleInputEl.value = '';
+    });
+
+    // Definice pro globální okna, pokud existují
+    if (!window.showAlertModal) {
+        window.showAlertModal = (title, message) => {
+            console.warn("Custom showAlertModal not fully initialized, using native alert.");
+            return new Promise((resolve) => {
+                alert(`${title}\n\n${message}`);
+                resolve(true);
+            });
+        };
+    }
+    if (!window.showConfirmModal) {
+         window.showConfirmModal = (title, message) => {
+            console.warn("Custom showConfirmModal not fully initialized, using native confirm.");
+            return new Promise((resolve) => {
+                resolve(confirm(`${title}\n\n${message}`));
+            });
+        };
+    }
+
+    const alertModalEl = document.getElementById('alert-modal');
+    const alertModalTitleEl = document.getElementById('alert-modal-title');
+    const alertModalMessageEl = document.getElementById('alert-modal-message');
+    let alertModalOkBtnEl = document.getElementById('alert-modal-ok-btn'); 
+
+    if(alertModalEl && alertModalTitleEl && alertModalMessageEl && alertModalOkBtnEl) {
+        window.showAlertModal = (title, message) => { 
+            return new Promise((resolve) => {
+                alertModalTitleEl.textContent = title;
+                alertModalMessageEl.textContent = message;
+                
+                const newOkBtn = alertModalOkBtnEl.cloneNode(true);
+                alertModalOkBtnEl.parentNode.replaceChild(newOkBtn, alertModalOkBtnEl);
+                alertModalOkBtnEl = newOkBtn; 
+                
+                alertModalOkBtnEl.onclick = () => { 
+                    hideModal(alertModalEl);
+                    resolve(true); 
+                };
+                showModal(alertModalEl);
+            });
+        };
+    }
+
+
+    const confirmModalEl = document.getElementById('confirm-modal');
+    const confirmModalTitleEl = document.getElementById('confirm-modal-title');
+    const confirmModalMessageEl = document.getElementById('confirm-modal-message');
+    let confirmModalOkBtnEl = document.getElementById('confirm-modal-ok-btn'); 
+    let confirmModalCancelBtnEl = document.getElementById('confirm-modal-cancel-btn'); 
+
+    if(confirmModalEl && confirmModalTitleEl && confirmModalMessageEl && confirmModalOkBtnEl && confirmModalCancelBtnEl) {
+        window.showConfirmModal = (title, message, buttonTexts = {}) => {
+            return new Promise((resolve) => {
+                confirmModalTitleEl.textContent = title;
+                confirmModalMessageEl.textContent = message;
+
+                const newOkBtn = confirmModalOkBtnEl.cloneNode(true);
+                newOkBtn.textContent = buttonTexts.okText || 'Potvrdit'; 
+                confirmModalOkBtnEl.parentNode.replaceChild(newOkBtn, confirmModalOkBtnEl);
+                confirmModalOkBtnEl = newOkBtn; 
+                
+                const newCancelBtn = confirmModalCancelBtnEl.cloneNode(true);
+                newCancelBtn.textContent = buttonTexts.cancelText || 'Zrušit'; 
+                confirmModalCancelBtnEl.parentNode.replaceChild(newCancelBtn, confirmModalCancelBtnEl);
+                confirmModalCancelBtnEl = newCancelBtn; 
+
+                confirmModalOkBtnEl.onclick = () => {
+                    hideModal(confirmModalEl);
+                    resolve(true); 
+                };
+                confirmModalCancelBtnEl.onclick = () => {
+                    hideModal(confirmModalEl);
+                    resolve(false); 
+                };
+                showModal(confirmModalEl);
+            });
+        };
+    }
+    
+    window.showSection = showSection; // Pro případné volání z konzole
+</script>
+</body>
+</html>
