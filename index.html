@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moje Osobní Stránka - Jiřík</title>
-    
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
         /* Reset a základní styly */
@@ -23,75 +22,44 @@
             min-height: 100vh;
             padding-top: 70px; /* Výška hlavičky, aby obsah nezačínal pod ní */
             text-align: center;
-            /* Obsah bude zviditelněn přes JS po ověření uživatele */
         }
         
-          /*:root {
+        :root {
             --header-bg-color: rgba(0,0,0,0.1); 
             --text-color: white;
             --border-color: rgba(255,255,255,0.2);
             --secondary-text-color: rgba(255,255,255,0.8);
             --nav-bg-color: rgba(0,0,0,0.3);
-        } */
+            --primary-gradient: linear-gradient(45deg, #667eea, #764ba2);
+            --secondary-gradient: linear-gradient(45deg, #42a5f5, #1e88e5);
+            --danger-gradient: linear-gradient(45deg, #ef5350, #e53935);
+        }
         
         header {
             background-color: var(--header-bg-color);
-
-
-
-            color: var(--text-color);
-
-
-
-            text-align: center;
-
-
-
-            padding: 2rem 1rem;
-
-
-
-            border-bottom: 1px solid var(--border-color);
-
-            margin-top: -40px;
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-top: -40px;
         }
         header h1 {
             font-size: 2.5em;
-
-            text-align: center;
-             margin-top: -45px;
-            margin-bottom: 0.5rem;
+            text-align: center;
+            margin-top: -45px;
+            margin-bottom: 0.5rem;
         }
         header p {
             font-size: 1.1em;
-
-
-
-            color: var(--secondary-text-color);
-
+            color: var(--secondary-text-color);
         }
 
         nav {
             background-color: var(--nav-bg-color);
-
-
-
             padding: 0.5rem 0;
-
-
-
             position: sticky;
-
-
-
             top: 0;
-
-
-
             z-index: 1000;
-
-
-
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
         }
@@ -165,11 +133,11 @@
             min-height: calc(100vh - 140px - 70px);
             margin-top: -20px;
         }
-         .container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-             margin-top: -20px;
+            margin-top: -20px;
         }
 
         section {
@@ -201,13 +169,13 @@
         section h1 {
             font-size: 2.5rem;
             text-align: center;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
         }
-         section h2 {
+        section h2 {
             font-size: 2rem;
             border-bottom: 2px solid #667eea;
             padding-bottom: 0.5rem;
@@ -248,7 +216,7 @@
         }
 
         .button, button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--primary-gradient);
             color: white !important; 
             border: none;
             padding: 0.75rem 1.5rem;
@@ -270,11 +238,11 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(45deg, #42a5f5, #1e88e5);
+            background: var(--secondary-gradient);
         }
 
         .btn-danger {
-            background: linear-gradient(45deg, #ef5350, #e53935);
+            background: var(--danger-gradient);
         }
 
         .gallery-controls {
@@ -366,7 +334,7 @@
             align-items: center;
             margin-bottom: 0.5rem;
         }
-         .item-header h3 {
+        .item-header h3 {
             color: #667eea;
             font-size: 1.25rem;
             margin-bottom: 0;
@@ -396,12 +364,12 @@
         }
 
         #links-table th {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--primary-gradient);
             color: white;
             font-weight: 600;
         }
         #links-table tr:nth-child(even) {
-             background-color: #fdfdff;
+            background-color: #fdfdff;
         }
         #links-table tr:hover td {
             background-color: rgba(102, 126, 234, 0.1);
@@ -415,8 +383,8 @@
             align-items: center;
         }
         #links-table a svg {
-             margin-right: 8px;
-             color: #5a67d8;
+            margin-right: 8px;
+            color: #5a67d8;
         }
 
         #links-table a:hover {
@@ -461,7 +429,7 @@
             transform: scale(1);
         }
 
-        .modal input[type="text"], .modal input[type="url"] { 
+        .modal input[type="text"], .modal input[type="url"], .modal input[type="email"], .modal input[type="password"] { 
             width: 100%;
             padding: 0.75rem;
             margin: 1rem 0;
@@ -545,7 +513,7 @@
             font-size: 0.85rem; 
             color: white;
             backdrop-filter: blur(5px);
-             -webkit-backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             display: inline-block;
             margin-top: 0.5rem;
         }
@@ -553,12 +521,142 @@
             font-weight: bold;
         }
 
+        /* Nové styly pro editaci inline obsahu */
+        [contenteditable="true"] {
+            outline: 2px dashed rgba(102, 126, 234, 0.5); /* Modrý rámeček pro editovatelné prvky */
+            padding: 2px;
+            min-width: 1em; /* Zaručuje, že prázdný prvek je stále viditelný */
+            transition: outline 0.2s ease;
+        }
+        [contenteditable="true"]:hover {
+            outline-color: rgba(102, 126, 234, 0.8);
+        }
+        [contenteditable="true"]:focus {
+            outline: 2px solid #667eea; /* Pevný modrý rámeček při aktivní editaci */
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .edit-controls {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .edit-controls button {
+            padding: 5px 8px;
+            font-size: 0.8em;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s;
+        }
+
+        .edit-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .editable-image-wrapper {
+            position: relative;
+            display: inline-block; /* Aby obal reagoval na velikost obrázku */
+        }
+        .editable-image-wrapper .edit-icon {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.2s;
+            z-index: 5;
+        }
+        .editable-image-wrapper .edit-icon:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .editable-link {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px; /* Místo pro edit ikonu */
+        }
+        .editable-link .edit-icon {
+            position: absolute;
+            right: -20px; /* Posune ikonu vedle odkazu */
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background-color 0.2s;
+            z-index: 5;
+        }
+        .editable-link .edit-icon:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Skrytí/Zobrazení editačních prvků */
+        body:not(.edit-mode) [contenteditable="true"],
+        body:not(.edit-mode) .edit-controls,
+        body:not(.edit-mode) .delete-img-btn,
+        body:not(.edit-mode) #data-management,
+        body:not(.edit-mode) #addImageUrlBtn,
+        body:not(.edit-mode) #newImageUrl,
+        body:not(.edit-mode) #save-code-btn,
+        body:not(.edit-mode) .actions .button,
+        body:not(.edit-mode) .editable-image-wrapper .edit-icon,
+        body:not(.edit-mode) .editable-link .edit-icon,
+        body:not(.edit-mode) .edit-mode-only { /* NOVINKA: Skrýváme i edit-mode-only prvky */
+            display: none !important;
+        }
+
+        /* Nová třída pro zobrazení edit módu */
+        body.edit-mode #edit-mode-toggle-btn {
+            display: block; /* Zobrazí tlačítko "Ukončit editaci" */
+        }
+        body.edit-mode .edit-controls,
+        body.edit-mode .delete-img-btn,
+        body.edit-mode #data-management,
+        body.edit-mode #addImageUrlBtn,
+        body.edit-mode #newImageUrl,
+        body.edit-mode #save-code-btn,
+        body.edit-mode .actions .button,
+        body.edit-mode .editable-image-wrapper .edit-icon,
+        body.edit-mode .editable-link .edit-icon {
+            display: flex; /* Zobrazí ostatní editační prvky */
+        }
+        body.edit-mode .editable-image-wrapper .edit-icon,
+        body.edit-mode .editable-link .edit-icon {
+            display: flex; /* Specificky pro ikony */
+        }
+        body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v edit módu */
+            display: table-cell !important; /* Pro buňky tabulky */
+        }
+
+
         @media (max-width: 768px) {
             body {
-                padding-top: 0; 
+                padding-top: 0;
             }
             header {
-                position: relative; 
+                position: relative;
                 padding: 1rem;
             }
             header h1 { font-size: 1.8rem; }
@@ -570,12 +668,12 @@
                 padding: 0.5rem 1rem;
             }
             .nav-container {
-                justify-content: center; 
-                gap: 0.5rem; 
+                justify-content: center;
+                gap: 0.5rem;
             }
 
             .nav-link {
-                padding: 0.5rem 0.8rem; 
+                padding: 0.5rem 0.8rem;
                 font-size: 0.85rem;
             }
             main {
@@ -593,13 +691,13 @@
                 font-size: 1.75rem;
             }
         }
-         @media (max-width: 480px) {
-             .nav-link {
+        @media (max-width: 480px) {
+            .nav-link {
                 font-size: 0.8rem;
                 padding: 0.4rem 0.6rem;
             }
             #gallery-container {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
             }
             .button, button {
                 padding: 0.6rem 1.2rem;
@@ -615,11 +713,12 @@
 
     </style>
 </head>
-<body style="visibility: hidden;"> <div id="loading-indicator" class="hidden">Načítání...</div>
+<body style="visibility: hidden;">
+    <div id="loading-indicator" class="hidden">Načítání...</div>
 
     <header>
-        <h1>Vítejte na mé osobní stránce!</h1>
-        
+        <h1 data-editable="header-title">Vítejte na mé osobní stránce!</h1>
+        <p data-editable="header-subtitle">Jiřík a jeho digitální království</p>
     </header>
 
     <nav>
@@ -632,68 +731,79 @@
             <a href="#" class="nav-link" data-section="gallery">Galerie</a>
             <a href="#" class="nav-link" data-section="links">Odkazy</a>
             <div id="data-management"></div>
-            <button onclick="signOut()">Odhlásit se</button> </div>
+            <button id="edit-mode-toggle-btn" class="button hidden" onclick="toggleEditMode()">Ukončit editaci</button>
+            <button id="login-button" class="button" onclick="showAuthModal()">Upravit stránku</button>
+        </div>
     </nav>
 
     <main>
-        <div class="container"> <section id="about">
-                <h2>O mně</h2>
-                <p><strong>Jiří Med – Milovník techniky a zábavy</strong></p>
+        <div class="container">
+            <section id="about">
+                <h2 data-editable="about-h2">O mně</h2>
+                <p data-editable="about-intro"><strong>Jiří Med – Milovník techniky a zábavy</strong></p>
                 <div>
-                    <h3>Co rád dělám o volných chvílích:</h3>
-                    <p><strong>Hraní počítačových her:</strong> Jsem fanoušek herního světa, kde se rád ponořím do různých virtuálních světů. Ať už je to akce, strategie nebo RPG, počítačové hry mě baví a pomáhají mi vypnout. Herní svět mi dává prostor pro dobrodružství, výzvy a rozvoj strategie.</p>
-
-                    <p><strong>Sledování YouTube videí:</strong> Když zrovna nehraju hry, užívám si sledování videí na YouTube. Zajímají mě herní let’s playe, technické novinky a videa oblíbených vloggerů, která mě inspirují a občas rozesmějí. YouTube je pro mě zábavou i zdrojem nových nápadů.</p>
-
+                    <h3 data-editable="about-h3-1">Co rád dělám o volných chvílích:</h3>
+                    <p data-editable="about-text-1"><strong>Hraní počítačových her:</strong> Jsem fanoušek herního světa, kde se rád ponořím do různých virtuálních světů. Ať už je to akce, strategie nebo RPG, počítačové hry mě baví a pomáhají mi vypnout. Herní svět mi dává prostor pro dobrodružství, výzvy a rozvoj strategie.</p>
+                    <p data-editable="about-text-2"><strong>Sledování YouTube videí:</strong> Když zrovna nehraju hry, užívám si sledování videí na YouTube. Zajímají mě herní let’s playe, technické novinky a videa oblíbených vloggerů, která mě inspirují a občas rozesmějí. YouTube je pro mě zábavou i zdrojem nových nápadů.</p>
                 </div>
                 <div>
-                    <h3>Další zájmy:</h3>
-                    <p><strong>Star Trek:</strong> Moje vášeň pro sci-fi svět Star Treku je obrovská. Miluju tento seriál i jeho postavy, které mě provázejí už od dětství. Vlastním projekt věnovaný Star Treku, kde kombinuji svou lásku k tomuto univerzu s technickými znalostmi. Futuristické technologie a warpové efekty jsou pro mě fascinující, a dokonce jsem je začlenil do svého webového projektu.</p>
-
-                    <p><strong>Technika a kódování:</strong> Jsem nadšenec do technologií a rád pracuju na různých technických výzvách. Programování a úprava HTML a CSS jsou mojí vášní, protože mě baví vytvářet funkční a esteticky krásné webové stránky. Mám cit pro detail a rád kombinuju moderní design s inovativními funkcemi.</p>
+                    <h3 data-editable="about-h3-2">Další zájmy:</h3>
+                    <p data-editable="about-text-3"><strong>Star Trek:</strong> Moje vášeň pro sci-fi svět Star Treku je obrovská. Miluju tento seriál i jeho postavy, které mě provázejí už od dětství. Vlastním projekt věnovaný Star Treku, kde kombinuji svou lásku k tomuto univerzu s technickými znalostmi. Futuristické technologie a warpové efekty jsou pro mě fascinující, a dokonce jsem je začlenil do svého webového projektu.</p>
+                    <p data-editable="about-text-4"><strong>Technika a kódování:</strong> Jsem nadšenec do technologií a rád pracuju na různých technických výzvách. Programování a úprava HTML a CSS jsou mojí vášní, protože mě baví vytvářet funkční a esteticky krásné webové stránky. Mám cit pro detail a rád kombinuju moderní design s inovativními funkcemi.</p>
                 </div>
                 <div>
-                    <h3>Styl života:</h3>
-                    <p>Rád trávím čas u počítače, ať už při hraní, tvorbě webů nebo sledování videí. Miluju barevné LED pásky a osvětlení, které bliká do rytmu hudby, což přináší skvělou atmosféru do mého prostoru. Tato kombinace techniky a estetiky mi dodává inspiraci a vytváří místo, kde se cítím dobře.</p>
+                    <h3 data-editable="about-h3-3">Styl života:</h3>
+                    <p data-editable="about-text-5">Rád trávím čas u počítače, ať už při hraní, tvorbě webů nebo sledování videí. Miluju barevné LED pásky a osvětlení, které bliká do rytmu hudby, což přináší skvělou atmosféru do mého prostoru. Tato kombinace techniky a estetiky mi dodává inspiraci a vytváří místo, kde se cítím dobře.</p>
                 </div>
             </section>
 
             <section id="portfolio">
-                <h2>Portfolio</h2>
-                <p>V této sekci najdeš ukázky mých projektů a práce, které odrážejí mé zájmy v oblasti technologií. I když nejsem programátor, díky spolupráci s AI, jako je ChatGPT a Claude.AI, se mi podařilo vytvořit tyto projekty, na které jsem pyšný.</p>
+                <h2 data-editable="portfolio-h2">Portfolio</h2>
+                <p data-editable="portfolio-intro">V této sekci najdeš ukázky mých projektů a práce, které odrážejí mé zájmy v oblasti technologií. I když nejsem programátor, díky spolupráci s AI, jako je ChatGPT a Claude.AI, se mi podařilo vytvořit tyto projekty, na které jsem pyšný.</p>
                 <div class="portfolio-items" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
-                        <h3>Star Trek Webový Projekt</h3>
-                        <p>Tento projekt je věnován mému oblíbenému sci-fi seriálu Star Trek. Díky pomoci od chatbotů ChatGPT a Claude.AI jsem vytvořil interaktivní webovou stránku s animacemi warp pohonu, seznamy postav a klíčovými momenty ze všech sérií. Stránka je responzivní a přizpůsobí se jakémukoli zařízení, což navozuje pocit, jako bys byl přímo ve vesmíru.</p>
-                        <a href="https://jirka22med.github.io/star-trek-universe/" class="button">Zobrazit projekt &rarr;</a>
+                    <div class="portfolio-item" data-item-id="star-trek-project" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd; position: relative;">
+                        <h3 data-editable="portfolio-item-1-title">Star Trek Webový Projekt</h3>
+                        <p data-editable="portfolio-item-1-desc">Tento projekt je věnován mému oblíbenému sci-fi seriálu Star Trek. Díky pomoci od chatbotů ChatGPT a Claude.AI jsem vytvořil interaktivní webovou stránku s animacemi warp pohonu, seznamy postav a klíčovými momenty ze všech sérií. Stránka je responzivní a přizpůsobí se jakémukoli zařízení, což navozuje pocit, jako bys byl přímo ve vesmíru.</p>
+                        <a href="https://jirka22med.github.io/star-trek-universe/" class="button editable-link" data-link-id="star-trek-link" data-editable-link-text="Zobrazit projekt &rarr;"><i class="fas fa-edit edit-icon"></i></a>
+                        <div class="edit-controls hidden">
+                            <button onclick="editPortfolioItem('star-trek-project')">Editovat</button>
+                        </div>
                     </div>
-                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
-                        <h3>Audio a LED projekty</h3>
-                        <p>Tento projekt je skvělým příkladem mého praktického přístupu k technice. Vzal jsem dva reproduktory Lamax Storm 1, které jsem rozebral, a odpojil jsem u nich jeden z malých vnitřních reproduktorů...</p>
-
-                        <p>Celý systém je postaven na jednoduchém principu: zvukové signály, které normálně pohánějí reproduktory, jsou přesměrovány tak, aby poháněly osvětlení...</p>
-                        <a href="#" class="button">Více o projektu &rarr;</a>
+                    <div class="portfolio-item" data-item-id="audio-led-project" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd; position: relative;">
+                        <h3 data-editable="portfolio-item-2-title">Audio a LED projekty</h3>
+                        <p data-editable="portfolio-item-2-desc-1">Tento projekt je skvělým příkladem mého praktického přístupu k technice. Vzal jsem dva reproduktory Lamax Storm 1, které jsem rozebral, a odpojil jsem u nich jeden z malých vnitřních reproduktorů...</p>
+                        <p data-editable="portfolio-item-2-desc-2">Celý systém je postaven na jednoduchém principu: zvukové signály, které normálně pohánějí reproduktory, jsou přesměrovány tak, aby poháněly osvětlení...</p>
+                        <a href="#" class="button editable-link" data-link-id="audio-led-link" data-editable-link-text="Více o projektu &rarr;"><i class="fas fa-edit edit-icon"></i></a>
+                        <div class="edit-controls hidden">
+                            <button onclick="editPortfolioItem('audio-led-project')">Editovat</button>
+                        </div>
                     </div>
-                    <div class="portfolio-item" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd;">
-                        <h3>Webový design a kódování</h3>
-                        <p>I když se nepovažuji za programátora, díky AI jsem zvládl tvorbu responzivních webových stránek s moderním designem. Mám několik projektů, které využívají HTML, CSS a JavaScript, a které mi pomohla vytvořit umělá inteligence.</p>
-                        <a href="#" class="button">Prohlédnout si ukázky &rarr;</a>
+                    <div class="portfolio-item" data-item-id="web-design-coding" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd; position: relative;">
+                        <h3 data-editable="portfolio-item-3-title">Webový design a kódování</h3>
+                        <p data-editable="portfolio-item-3-desc">I když se nepovažuji za programátora, díky AI jsem zvládl tvorbu responzivních webových stránek s moderním designem. Mám několik projektů, které využívají HTML, CSS a JavaScript, a které mi pomohla vytvořit umělá inteligence.</p>
+                        <a href="#" class="button editable-link" data-link-id="web-design-link" data-editable-link-text="Prohlédnout si ukázky &rarr;"><i class="fas fa-edit edit-icon"></i></a>
+                        <div class="edit-controls hidden">
+                            <button onclick="editPortfolioItem('web-design-coding')">Editovat</button>
+                        </div>
                     </div>
                 </div>
+                <button id="add-portfolio-item-btn" class="button hidden">Přidat položku do portfolia</button>
             </section>
 
             <section id="contacts">
-                <h2>Kontakty</h2>
-                <p>Zde můžete přidat své kontaktní údaje, jako je e-mail, odkazy na sociální sítě (např. Discord, GitHub) nebo jiné způsoby, jak vás mohou lidé oslovit.</p>
+                <h2 data-editable="contacts-h2">Kontakty</h2>
+                <p data-editable="contacts-intro">Zde můžete přidat své kontaktní údaje, jako je e-mail, odkazy na sociální sítě (např. Discord, GitHub) nebo jiné způsoby, jak vás mohou lidé oslovit.</p>
                 <div class="contact-details" style="margin-top: 1rem;">
-                    <p><strong>E-mail:</strong> <a href="mailto:tvuj.email@example.com">tvuj.email@example.com</a></p>
-                    <p><strong>Discord:</strong> TvojeJmeno#1234</p>
+                    <p><strong>E-mail:</strong> <a href="mailto:tvuj.email@example.com" data-link-id="contact-email" data-editable-link-text="tvuj.email@example.com" class="editable-link"><i class="fas fa-edit edit-icon"></i></a></p>
+                    <p><strong>Discord:</strong> <span data-editable="contact-discord">TvojeJmeno#1234</span></p>
                 </div>
-                <div id="user-id-display" class="hidden">Vaše User ID: <span id="firebase-user-id"></span></div> </section>
+                <div id="user-id-display" class="hidden">Vaše User ID: <span id="firebase-user-id"></span></div>
+            </section>
 
             <section id="editor">
                 <h2>HTML Editor</h2>
-                <div class="editor-container"> <div>
+                <div class="editor-container">
+                    <div>
                         <label for="html-editor">HTML Kód:</label>
                         <textarea id="html-editor" placeholder="Zde pište svůj HTML kód..."></textarea>
                     </div>
@@ -715,8 +825,8 @@
             <section id="gallery">
                 <h2>Galerie</h2>
                 <div class="gallery-controls">
-                     <input type="url" id="newImageUrl" placeholder="Vložte URL adresu obrázku...">
-                     <button id="addImageUrlBtn" class="button">Přidat obrázek</button>
+                    <input type="url" id="newImageUrl" placeholder="Vložte URL adresu obrázku...">
+                    <button id="addImageUrlBtn" class="button">Přidat obrázek</button>
                 </div>
                 <div id="gallery-container">
                     <p>Načítání obrázků...</p>
@@ -731,22 +841,29 @@
                             <th>Ikona</th>
                             <th>Název odkazu</th>
                             <th>Adresa URL</th>
+                            <th class="edit-mode-only">Akce</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Odkazy se budou generovat zde -->
                     </tbody>
                 </table>
+                <button id="add-link-btn" class="button hidden">Přidat odkaz</button>
             </section>
-        </div> </main>
+        </div>
+    </main>
 
     <footer>
-        <p>&copy; <span id="currentYear"></span> Jiří Med. Všechna práva vyhrazena.</p>
-        <p>Inspirováno technologiemi a budoucností.</p>
+        <p>&copy; <span id="currentYear"></span> <span data-editable="footer-copyright-name">Jiří Med</span>. Všechna práva vyhrazena.</p>
+        <p data-editable="footer-slogan">Inspirováno technologiemi a budoucností.</p>
     </footer>
 
-    <div id="image-modal" class="modal"> <div class="modal-content">
+    <!-- Modals (stejné jako v původním kódu) -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
             <img id="modal-img" src="" alt="Zvětšený obrázek">
-            <div class="modal-nav"> <button id="prev-image-btn" class="button btn-secondary">
+            <div class="modal-nav">
+                <button id="prev-image-btn" class="button btn-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                     Předchozí
                 </button>
@@ -789,189 +906,332 @@
                 <button id="confirm-modal-cancel-btn" class="button btn-secondary">Zrušit</button>
                 <button id="confirm-modal-ok-btn" class="button btn-danger">Potvrdit</button>
             </div>
+    </div>
+</div>
+
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <h3>Přihlášení / Registrace</h3>
+        <label for="auth-email">Email:</label>
+        <input type="email" id="auth-email" placeholder="vas.email@example.com">
+        <label for="auth-password">Heslo:</label>
+        <input type="password" id="auth-password" placeholder="********">
+        <div class="modal-buttons">
+            <button id="login-auth-btn" class="button">Přihlásit se</button>
+            <button id="signup-auth-btn" class="button btn-secondary">Registrovat se</button>
+            <button id="cancel-auth-btn" class="button btn-danger">Zrušit</button>
+        </div>
+        <p id="auth-error-message" style="color: red; margin-top: 10px;"></p>
+    </div>
+</div>
+
+<div id="edit-image-modal" class="modal">
+    <div class="modal-content">
+        <h3>Upravit obrázek</h3>
+        <label for="edit-image-url">URL obrázku:</label>
+        <input type="url" id="edit-image-url" placeholder="https://example.com/obrazek.jpg">
+        <label for="edit-image-name">Název obrázku:</label>
+        <input type="text" id="edit-image-name" placeholder="Popis obrázku">
+        <div class="modal-buttons">
+            <button id="cancel-edit-image-btn" class="button btn-secondary">Zrušit</button>
+            <button id="save-edit-image-btn" class="button">Uložit</button>
         </div>
     </div>
+</div>
+
+<div id="edit-link-modal" class="modal">
+    <div class="modal-content">
+        <h3>Upravit odkaz</h3>
+        <label for="edit-link-title">Název odkazu:</label>
+        <input type="text" id="edit-link-title" placeholder="Název odkazu">
+        <label for="edit-link-url">URL odkazu:</label>
+        <input type="url" id="edit-link-url" placeholder="https://example.com">
+        <div class="modal-buttons">
+            <button id="cancel-edit-link-btn" class="button btn-secondary">Zrušit</button>
+            <button id="save-edit-link-btn" class="button">Uložit</button>
+        </div>
+    </div>
+</div>
+
+<div id="edit-portfolio-modal" class="modal">
+    <div class="modal-content">
+        <h3>Upravit položku portfolia</h3>
+        <label for="edit-portfolio-title">Název:</label>
+        <input type="text" id="edit-portfolio-title" placeholder="Název projektu">
+        <label for="edit-portfolio-desc-1">Popis 1:</label>
+        <textarea id="edit-portfolio-desc-1" rows="5" placeholder="Popis projektu"></textarea>
+        <label for="edit-portfolio-desc-2">Popis 2 (volitelné):</label>
+        <textarea id="edit-portfolio-desc-2" rows="5" placeholder="Další popis"></textarea>
+        <label for="edit-portfolio-link-text">Text tlačítka odkazu:</label>
+        <input type="text" id="edit-portfolio-link-text" placeholder="Text tlačítka">
+        <label for="edit-portfolio-link-url">URL odkazu:</label>
+        <input type="url" id="edit-portfolio-link-url" placeholder="https://">
+        <div class="modal-buttons">
+            <button id="cancel-edit-portfolio-btn" class="button btn-secondary">Zrušit</button>
+            <button id="save-edit-portfolio-btn" class="button">Uložit</button>
+            <button id="delete-portfolio-btn" class="button btn-danger hidden">Smazat položku</button>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     // --- Supabase Konstanty ---
     const SUPABASE_URL = 'https://aknjpurxdbtsxillmqbd.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrbmpwdXJ4ZGJ0c3hpbGxtcWJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEzMzAsImV4cCI6MjA2Mzc2NzMzMH0.otk-74BBM-SwC_zA0WqqcwGVab5lBfrLiyeYOmh4Xio';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    // Globální proměnná pro stav editačního módu
+    let isEditMode = false;
+    // NOVINKA: Konstanta pro klíč v localStorage pro uložení stavu edit módu
+    const EDIT_MODE_KEY = 'portfolio_edit_mode_active';
+
     document.addEventListener('DOMContentLoaded', function() {
         const loadingIndicatorElement = document.getElementById('loading-indicator');
 
-        // Zobrazíme indikátor načítání hned na začátku
         if (loadingIndicatorElement) {
-            loadingIndicatorElement.textContent = "Ověřování uživatele...";
+            loadingIndicatorElement.textContent = "Načítání stránky...";
             loadingIndicatorElement.classList.remove('hidden');
         } else {
             console.error("Loading indicator element not found!");
         }
         
-        // Zkontrolujeme, zda je knihovna Supabase načtena
         if (typeof supabase === 'undefined' || typeof supabase.createClient !== 'function') {
             console.error('Supabase library not loaded or createClient is not a function.');
             if (loadingIndicatorElement) {
                 loadingIndicatorElement.textContent = 'Kritická chyba: Knihovna Supabase se nenačetla.';
             }
-            document.body.style.visibility = 'visible'; // Zobrazíme tělo, aby byla vidět chybová hláška
-            // Můžeš zde přidat zobrazení chyby přímo na stránce, pokud loadingIndicator není dostatečný
+            document.body.style.visibility = 'visible'; 
             return;
         }
 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // Globální funkce pro odhlášení (pro onclick atribut)
-        window.signOut = async function() {
-            if (loadingIndicatorElement) {
-                loadingIndicatorElement.textContent = "Odhlašování...";
-                loadingIndicatorElement.classList.remove('hidden');
-            }
-            document.body.style.visibility = 'hidden';
-
-            const { error } = await supabaseClient.auth.signOut();
-            if (error) {
-                console.error('Chyba při odhlašování:', error.message);
-                if (window.showAlertModal) showAlertModal("Chyba odhlášení", `Nepodařilo se odhlásit: ${error.message}`);
-                else alert(`Chyba odhlášení: ${error.message}`);
-                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
-                document.body.style.visibility = 'visible'; // Zobrazit tělo, i když odhlášení selhalo, aby uživatel nebyl zaseknutý
-            } else {
-                window.location.replace('login.html'); // Použij replace pro lepší historii
-            }
-        }
-
-        // Sledování změn stavu přihlášení
+        // --- Supabase autentizace a přesměrování ---
         supabaseClient.auth.onAuthStateChange((event, session) => {
             console.log('Supabase Auth State Change:', event, session);
             if (event === 'SIGNED_OUT') {
-                // Pokud je uživatel odhlášen, přesměruj na login.html
-                // Toto se může stát i v jiné záložce, proto je důležité.
-                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') { // Zabráníme nekonečnému přesměrování, pokud jsme již na login/signup
-                    window.location.replace('login.html');
+                disableEditMode(); // Vždy vypneme edit mód po odhlášení
+                // NOVINKA: Odebereme stav edit módu z localStorage
+                localStorage.removeItem(EDIT_MODE_KEY);
+                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') {
+                     // Nyní už nepřesměrováváme, jen se skryjí editační prvky
+                    console.log('Uživatel odhlášen, editační režim vypnut.');
+                    // Zobrazíme tlačítko pro přihlášení a skryjeme tlačítko pro odhlášení
+                    document.getElementById('login-button').classList.remove('hidden');
+                    document.getElementById('edit-mode-toggle-btn').classList.add('hidden');
+                    document.getElementById('user-id-display').classList.add('hidden'); // Skryjeme user ID
                 }
             } else if (event === 'SIGNED_IN') {
-                // Pokud se uživatel přihlásí (např. v jiné záložce) a je na login stránce, přesměrujeme ho
-                if (window.location.pathname === '/login.html' || window.location.pathname === '/signup.html') {
-                     window.location.replace('index.html'); // Předpokládáme, že toto je hlavní stránka
-                }
-                // Aktualizace User ID, pokud je zobrazeno
+                console.log('Uživatel je přihlášen.');
+                document.getElementById('login-button').classList.add('hidden'); // Skryjeme přihlašovací tlačítko
+                document.getElementById('edit-mode-toggle-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro editaci
+                
+                // Zobrazíme User ID
                 const userIdDisplaySpan = document.getElementById('firebase-user-id');
                 const userIdContainer = document.getElementById('user-id-display');
                 if (session && session.user && userIdDisplaySpan && userIdContainer) {
                     userIdDisplaySpan.textContent = session.user.id;
                     userIdContainer.classList.remove('hidden');
                 }
+                initializeApp(); // Inicializujeme aplikaci, protože uživatel je přihlášen
+                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
+                document.body.style.visibility = 'visible';
+
+                // NOVINKA: Zkontrolujeme, jestli byl edit mód aktivní při posledním zavření
+                if (localStorage.getItem(EDIT_MODE_KEY) === 'true') {
+                    enableEditMode(); // Zapneme edit mód, pokud byl uložen jako aktivní
+                    document.getElementById('edit-mode-toggle-btn').textContent = 'Ukončit editaci';
+                } else {
+                    disableEditMode(); // Jinak zajistíme, že je vypnutý (a zobrazí se "Přejít do editace")
+                    document.getElementById('edit-mode-toggle-btn').textContent = 'Přejít do editace';
+                }
             }
         });
 
-        // Hlavní funkce pro kontrolu uživatele a inicializaci aplikace
-        async function checkUserAndThenInitializeApp() {
+        // Kontrola stavu přihlášení při načtení stránky
+        async function checkInitialAuthState() {
             const { data: { session }, error } = await supabaseClient.auth.getSession();
-
             if (error) {
                 console.error("Chyba při získávání session:", error);
                 if (loadingIndicatorElement) {
                     loadingIndicatorElement.textContent = `Chyba ověření: ${error.message}. Zkuste obnovit.`;
                 }
-                document.body.style.visibility = 'visible'; // Zobrazíme tělo pro chybovou hlášku
-                return; // Necháme uživatele na stránce s chybou v indikátoru
+                document.body.style.visibility = 'visible'; 
+                return;
             }
 
-            if (!session) {
-                // Uživatel není přihlášen, přesměrujeme na login.html
-                // Ujisti se, že 'login.html' existuje ve stejném adresáři nebo uprav cestu
-                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') {
-                    window.location.replace('login.html');
-                } else {
-                    // Pokud jsme již na login/signup stránce a není session, nic neděláme, necháme uživatele se přihlásit/registrovat
-                    if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
-                    document.body.style.visibility = 'visible';
-                }
-            } else {
-                // Uživatel je přihlášen
-                console.log('Uživatel je přihlášen:', session.user.email);
-                document.body.style.visibility = 'visible'; // Zobrazíme obsah stránky
-
-                // Inicializujeme zbytek aplikace
-                initializeApp(); // Tvá stávající funkce pro inicializaci obsahu
-
-                // Zobrazíme User ID
-                const userIdDisplaySpan = document.getElementById('firebase-user-id'); // Používáš toto ID
+            if (session) {
+                console.log('Uživatel je již přihlášen:', session.user.email);
+                document.getElementById('login-button').classList.add('hidden'); // Skryjeme přihlašovací tlačítko
+                document.getElementById('edit-mode-toggle-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro editaci
+                
+                const userIdDisplaySpan = document.getElementById('firebase-user-id');
                 const userIdContainer = document.getElementById('user-id-display');
-                if (userIdDisplaySpan && userIdContainer) {
-                    userIdDisplaySpan.textContent = session.user.id; // Můžeš zobrazit i session.user.email
+                if (session.user && userIdDisplaySpan && userIdContainer) {
+                    userIdDisplaySpan.textContent = session.user.id;
                     userIdContainer.classList.remove('hidden');
                 }
-                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden'); // Skryjeme indikátor načítání
+
+                // NOVINKA: Zkontrolujeme, jestli byl edit mód aktivní při posledním zavření
+                if (localStorage.getItem(EDIT_MODE_KEY) === 'true') {
+                    enableEditMode(); // Zapneme edit mód, pokud byl uložen jako aktivní
+                    document.getElementById('edit-mode-toggle-btn').textContent = 'Ukončit editaci';
+                } else {
+                    disableEditMode(); // Jinak zajistíme, že je vypnutý (a zobrazí se "Přejít do editace")
+                    document.getElementById('edit-mode-toggle-btn').textContent = 'Přejít do editace';
+                }
+
+                initializeApp(); // Inicializujeme aplikaci
+                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
+                document.body.style.visibility = 'visible';
+            } else {
+                console.log('Uživatel není přihlášen.');
+                // Pokud není přihlášen, inicializujeme appku bez editačních prvků
+                initializeApp(); 
+                if (loadingIndicatorElement) loadingIndicatorElement.classList.add('hidden');
+                document.body.style.visibility = 'visible';
+                document.getElementById('login-button').classList.remove('hidden');
+                document.getElementById('edit-mode-toggle-btn').classList.add('hidden');
+                document.getElementById('user-id-display').classList.add('hidden');
+                // V případě, že uživatel není přihlášen, vždy zajistíme, že edit mód je vypnutý
+                disableEditMode(); 
+                localStorage.removeItem(EDIT_MODE_KEY); // Vypneme i stav v localStorage
             }
         }
-
-        // Spustíme proces ověření a inicializace
-        checkUserAndThenInitializeApp();
+        checkInitialAuthState();
     });
 
-    // --- Zde začíná tvůj původní kód (globální proměnné a funkce) ---
+    // --- Funkce pro zobrazení/skrytí přihlašovacího modalu ---
+    function showAuthModal() {
+        showModal(document.getElementById('auth-modal'));
+        document.getElementById('auth-email').focus();
+        document.getElementById('auth-error-message').textContent = ''; // Vyčistíme chybu
+    }
+
+    function hideAuthModal() {
+        hideModal(document.getElementById('auth-modal'));
+        document.getElementById('auth-email').value = '';
+        document.getElementById('auth-password').value = '';
+        document.getElementById('auth-error-message').textContent = '';
+    }
+
+    document.getElementById('cancel-auth-btn')?.addEventListener('click', hideAuthModal);
+
+    // --- Funkce pro přihlášení ---
+    document.getElementById('login-auth-btn')?.addEventListener('click', async () => {
+        const email = document.getElementById('auth-email').value;
+        const password = document.getElementById('auth-password').value;
+        const errorMessageEl = document.getElementById('auth-error-message');
+        errorMessageEl.textContent = ''; // Reset error
+
+        showLoading("Přihlašování...");
+
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) {
+            console.error('Chyba při přihlašování:', error.message);
+            errorMessageEl.textContent = `Chyba: ${error.message}`;
+            hideLoading();
+        } else {
+            hideAuthModal();
+            enableEditMode(); // Po úspěšném přihlášení zapneme editační mód
+            hideLoading();
+        }
+    });
+
+    // --- Funkce pro registraci ---
+    document.getElementById('signup-auth-btn')?.addEventListener('click', async () => {
+        const email = document.getElementById('auth-email').value;
+        const password = document.getElementById('auth-password').value;
+        const errorMessageEl = document.getElementById('auth-error-message');
+        errorMessageEl.textContent = ''; // Reset error
+
+        showLoading("Registrace...");
+
+        const { data, error } = await supabaseClient.auth.signUp({ email, password });
+        if (error) {
+            console.error('Chyba při registraci:', error.message);
+            errorMessageEl.textContent = `Chyba: ${error.message}`;
+            hideLoading();
+        } else {
+            if (data && data.user) {
+                showAlertModal("Registrace úspěšná", "Registrace proběhla úspěšně! Nyní se můžete přihlásit.");
+                hideAuthModal();
+                hideLoading();
+            } else {
+                showAlertModal("Registrace vyžaduje potvrzení", "Zkontrolujte svůj email pro potvrzení registrace. Poté se můžete přihlásit.");
+                hideAuthModal();
+                hideLoading();
+            }
+        }
+    });
+
+    // --- Funkce pro odhlášení ---
+    window.signOut = async function() {
+        const confirmed = await (window.showConfirmModal ?
+            showConfirmModal("Odhlásit se?", "Opravdu se chcete odhlásit?", { okText: 'Ano, odhlásit', cancelText: 'Zůstat přihlášen' }) :
+            confirm("Opravdu se chcete odhlásit?")
+        );
+
+        if (confirmed) {
+            showLoading("Odhlašování...");
+            const { error } = await supabaseClient.auth.signOut();
+            if (error) {
+                console.error('Chyba při odhlašování:', error.message);
+                showAlertModal("Chyba odhlášení", `Nepodařilo se odhlásit: ${error.message}`);
+                hideLoading();
+            } else {
+                showAlertModal("Odhlášení", "Byli jste úspěšně odhlášeni. Pro úpravy se opět přihlaste.");
+                disableEditMode();
+                hideLoading();
+            }
+        }
+    };
+
+    // --- Globální proměnné a pomocné funkce ---
     let activeSection = 'about'; 
     let galleryImagesData = [];
     let savedCodesData = [];
+    let externalLinksData = [];
     let currentModalImageIndex = 0; 
-    // const loadingIndicator = document.getElementById('loading-indicator'); // Již definováno výše jako loadingIndicatorElement
+    let editableContentData = {}; // Nový objekt pro ukládání editovatelného obsahu
 
     const STORAGE_KEYS = {
         GALLERY_IMAGES: 'portfolio_gallery_images',
         SAVED_CODES: 'portfolio_saved_codes',
-        EXTERNAL_LINKS: 'portfolio_external_links'
+        EXTERNAL_LINKS: 'portfolio_external_links',
+        EDITABLE_CONTENT: 'portfolio_editable_content' // Nový klíč pro editovatelný obsah
     };
 
     const initialImageUrls = [ 
         { id: 'initial-1', url: 'https://img.freepik.com/free-photo/futuristic-background-with-colorful-abstract-design_1340-39 futuristic-technology-background-with-neon-lights_76964-11458.jpg?w=826&t=st=1716545000~exp=1716545600~hmac=e6108f60104301f3b2886131029b0f10151707f3020142e9950b1e22704c654a', name: 'Technologie'},
-
-  { id: 'initial-2', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k18.jpg?ver=0', name: 'Srdce'},
-
-  { id: 'initial-3', url: 'https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=1060&t=st=1716545052~exp=1716545652~hmac=c6a7d107b56da6822f221372f4476a3793075997b820160f494a887688068b14', name: 'Vesmírná loď'},
-
-  { id: 'initial-4', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k7.jpg?ver=0', name: 'Mlhovina'},
-
-  { id: 'initial-5', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k8.jpg?ver=0', name: 'Kyberpunk město'},
-
-  { id: 'initial-6', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k13.jpg?ver=0', name: 'Notebook v akci'},
-
-  { id: 'initial-7', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k14.jpg?ver=0', name: 'Galaxie'},
-
-  { id: 'initial-8', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1920x10804.jpg?ver=0', name: 'Lidský mozek'},
-
-  { id: 'initial-9', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_15360x86402.jpg?ver=0', name: 'Vědecké laboratoře'},
-
-  { id: 'initial-10', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/misurina-sunset.jpg?ver=0', name: 'Neuronová síť'},
-
-  { id: 'initial-11', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/snowy-landscape-with-mountains-lake-with-snow-ground.jpg?ver=0', name: 'Datová mřížka'},
-
-  { id: 'initial-12', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/wet-sphere-reflective-water-abstract-beauty-generated-by-ai.jpg?ver=0', name: 'Futuristické město'},
-
-  { id: 'initial-13', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/vnon-pozadi-od-admirala-chatbota..jpg?ver=0', name: 'Světelná geometrie'},
-
-  { id: 'initial-14', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1024x1792.jpg?ver=0', name: 'Digitální plameny'},
-
-  { id: 'initial-15', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_300x3001_2.jpg?ver=0', name: 'Exoplaneta'},
-
-  { id: 'initial-16', url: 'https://img36.rajce.idnes.cz/d3603/10/10185/10185286_0147349ad505c43a2d9f6eb372624417/images/CIMG0039.jpg?ver=3', name: 'Kybernetická maska'},
+        { id: 'initial-2', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k18.jpg?ver=0', name: 'Srdce'},
+        { id: 'initial-3', url: 'https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=1060&t=st=1716545052~exp=1716545652~hmac=c6a7d107b56da6822f221372f4476a3793075997b820160f494a887688068b14', name: 'Vesmírná loď'},
+        { id: 'initial-4', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k7.jpg?ver=0', name: 'Mlhovina'},
+        { id: 'initial-5', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k8.jpg?ver=0', name: 'Kyberpunk město'},
+        { id: 'initial-6', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k13.jpg?ver=0', name: 'Notebook v akci'},
+        { id: 'initial-7', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_4k14.jpg?ver=0', name: 'Galaxie'},
+        { id: 'initial-8', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1920x10804.jpg?ver=0', name: 'Lidský mozek'},
+        { id: 'initial-9', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_15360x86402.jpg?ver=0', name: 'Vědecké laboratoře'},
+        { id: 'initial-10', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/misurina-sunset.jpg?ver=0', name: 'Neuronová síť'},
+        { id: 'initial-11', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/snowy-landscape-with-mountains-lake-with-snow-ground.jpg?ver=0', name: 'Datová mřížka'},
+        { id: 'initial-12', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/wet-sphere-reflective-water-abstract-beauty-generated-by-ai.jpg?ver=0', name: 'Futuristické město'},
+        { id: 'initial-13', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/vnon-pozadi-od-admirala-chatbota..jpg?ver=0', name: 'Světelná geometrie'},
+        { id: 'initial-14', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_1024x1792.jpg?ver=0', name: 'Digitální plameny'},
+        { id: 'initial-15', url: 'https://img41.rajce.idnes.cz/d4102/19/19244/19244630_db82ad174937335b1a151341387b7af2/images/image_300x3001_2.jpg?ver=0', name: 'Exoplaneta'},
+        { id: 'initial-16', url: 'https://img36.rajce.idnes.cz/d3603/10/10185/10185286_0147349ad505c43a2d9f6eb372624417/images/CIMG0039.jpg?ver=3', name: 'Kybernetická maska'},
     ];
 
-    let externalLinksData = [
+    let initialExternalLinksData = [
         { title: 'Claude AI', url: 'https://claude.ai/' }, { title: 'SledujSerialy', url: 'https://sledujserialy.sx/' },
-
-    { title: 'Kukaj.me', url: 'https://serial.kukaj.me/' }, { title: 'ProSebe.cz', url: 'https://prosebe.cz/user/project' },
-
-    { title: 'Populace.cz', url: 'https://www.populace.cz' }, { title: 'My-Map.eu', url: 'https://www.my-map.eu/odmeny' },
-
-    { title: 'Národní Panel', url: 'https://www.narodnipanel.cz/?backlink=expx2' }, { title: 'Lifepoints Panel', url: 'https://app.lifepointspanel.com/en-US/login' },
-
-    { title: 'Voyo', url: 'https://voyo.nova.cz/' }, { title: 'Přehraj.to', url: 'https://prehrajto.cz/' },
-
-    { title: 'SledovaniTV.cz', url: 'https://sledovanitv.cz/' }, { title: 'Bombuj', url: 'https://www.bombuj.si/' },
+        { title: 'Kukaj.me', url: 'https://serial.kukaj.me/' }, { title: 'ProSebe.cz', url: 'https://prosebe.cz/user/project' },
+        { title: 'Populace.cz', url: 'https://www.populace.cz' }, { title: 'My-Map.eu', url: 'https://www.my-map.eu/odmeny' },
+        { title: 'Národní Panel', url: 'https://www.narodnipanel.cz/?backlink=expx2' }, { title: 'Lifepoints Panel', url: 'https://app.lifepointspanel.com/en-US/login' },
+        { title: 'Voyo', url: 'https://voyo.nova.cz/' }, { title: 'Přehraj.to', url: 'https://prehrajto.cz/' },
+        { title: 'SledovaniTV.cz', url: 'https://sledovanitv.cz/' }, { title: 'Bombuj', url: 'https://www.bombuj.si/' },
     ];
 
+
+    // --- Funkce pro ukládání a načítání z localStorage (s upravenou logikou pro editableContent) ---
     function saveToLocalStorage(key, data) {
         try {
             localStorage.setItem(key, JSON.stringify(data));
@@ -999,9 +1259,24 @@
             Object.values(STORAGE_KEYS).forEach(key => {
                 localStorage.removeItem(key);
             });
+            // NOVINKA: Odebereme i stav edit módu
+            localStorage.removeItem(EDIT_MODE_KEY);
+
             if (window.showAlertModal) showAlertModal("Data vymazána", "Všechna uložená data byla úspěšně vymazána z trvalého úložiště.");
             else alert("Data vymazána.");
-            loadDataFromStorage(); // Obnovení výchozích dat
+            
+            // Po vymazání se vrátíme k výchozím datům a obnovíme zobrazení
+            galleryImagesData = [...initialImageUrls];
+            savedCodesData = [];
+            externalLinksData = [...initialExternalLinksData];
+            editableContentData = {}; // Reset editovatelného obsahu
+            applyEditableContent(); // Aplikovat prázdný objekt, což by mělo vrátit defaultní HTML
+
+            updateGalleryDisplay();   
+            renderSavedCodesDisplay();
+            renderExternalLinks();
+            showAlertModal("Data vymazána", "Všechna data včetně upraveného textu byla vymazána a stránka se vrátila k výchozímu obsahu.");
+            
             return true;
         } catch (error) {
             console.error('Chyba při mazání localStorage dat:', error);
@@ -1018,18 +1293,58 @@
         savedCodesData = loadFromLocalStorage(STORAGE_KEYS.SAVED_CODES, []);
         
         const savedLinks = loadFromLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, []);
-        externalLinksData = savedLinks.length > 0 ? savedLinks : externalLinksData; // Zachováme default, pokud nic není uloženo
+        externalLinksData = savedLinks.length > 0 ? savedLinks : [...initialExternalLinksData]; // Zachováme default, pokud nic není uloženo
+
+        editableContentData = loadFromLocalStorage(STORAGE_KEYS.EDITABLE_CONTENT, {}); // Načtení editovatelného obsahu
+        applyEditableContent(); // Aplikovat načtený obsah na stránku
     }
 
+    // --- Funkce pro aplikaci editovatelného obsahu ---
+    function applyEditableContent() {
+        for (const id in editableContentData) {
+            const element = document.querySelector(`[data-editable="${id}"]`);
+            if (element) {
+                if (element.tagName === 'A' && element.classList.contains('editable-link')) {
+                    element.href = editableContentData[id].url || '#';
+                    element.innerHTML = `${editableContentData[id].text || ''}<i class="fas fa-edit edit-icon ${isEditMode ? '' : 'hidden'}"></i>`;
+                } else {
+                    element.innerHTML = editableContentData[id];
+                }
+            }
+        }
+
+        // Aplikace pro portfolio položky (jsou komplexnější)
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            const itemId = item.dataset.itemId;
+            if (editableContentData[`${itemId}-title`]) {
+                item.querySelector(`[data-editable="${itemId}-title"]`).innerHTML = editableContentData[`${itemId}-title`];
+            }
+            if (editableContentData[`${itemId}-desc-1`]) {
+                item.querySelector(`[data-editable="${itemId}-desc-1"]`).innerHTML = editableContentData[`${itemId}-desc-1`];
+            }
+            // Zkontrolujeme, zda existuje data-editable pro druhý popis
+            const desc2Element = item.querySelector(`[data-editable="${itemId}-desc-2"]`);
+            if (desc2Element && editableContentData[`${itemId}-desc-2`]) {
+                desc2Element.innerHTML = editableContentData[`${itemId}-desc-2`];
+            }
+
+            const linkElement = item.querySelector(`[data-link-id="${itemId}-link"]`);
+            if (linkElement && editableContentData[`${itemId}-link-url`]) {
+                linkElement.href = editableContentData[`${itemId}-link-url`];
+                linkElement.innerHTML = `${editableContentData[`${itemId}-link-text`]}<i class="fas fa-edit edit-icon ${isEditMode ? '' : 'hidden'}"></i>`;
+            }
+        });
+    }
+
+
     function initializeApp() {
-        // showLoading je nyní řešeno v checkUserAndThenInitializeApp a na začátku DOMContentLoaded
-        // Pokud initializeApp něco vizuálně mění, co by mělo být až po načtení, je to zde správně.
         setupNavigation();
         setupHtmlEditor();
         setupGallery();
         setupDataManagement();
         
-        loadDataFromStorage(); // Načtení dat by mělo proběhnout před renderováním
+        loadDataFromStorage(); 
         
         renderExternalLinks(); 
         updateGalleryDisplay();
@@ -1040,11 +1355,112 @@
         
         showSection(activeSection, true); 
         console.log("Aplikace inicializována.");
-        // hideLoading je voláno v checkUserAndThenInitializeApp po úspěšném přihlášení a inicializaci
     }
 
-    // Funkce showLoading a hideLoading jsou nyní volány primárně v kontextu ověření
-    // Můžeš je stále používat i jinde, pokud potřebuješ
+    // --- Funkce pro přepínání editačního módu ---
+    function toggleEditMode() {
+        if (isEditMode) {
+            disableEditMode();
+            showAlertModal("Editace ukončena", "Režim úprav byl vypnut. Vaše změny byly uloženy do mezipaměti prohlížeče. Pro trvalé uložení klikněte na 'Uložit vše'.");
+        } else {
+            // Při zapínání edit módu už nemusíme vyvolávat přihlášení, když je uživatel přihlášen
+            enableEditMode();
+            showAlertModal("Režim úprav", "Jste v režimu úprav. Klikněte na text pro úpravu, nebo použijte ikony pro obrázky/odkazy. Nezapomeňte uložit změny!");
+        }
+    }
+
+    function enableEditMode() {
+        isEditMode = true;
+        document.body.classList.add('edit-mode');
+        document.getElementById('login-button').classList.add('hidden'); // Skryjeme přihlašovací tlačítko
+        document.getElementById('edit-mode-toggle-btn').textContent = 'Ukončit editaci';
+        document.getElementById('edit-mode-toggle-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro ukončení editace
+
+        // Nastavíme contenteditable na true pro všechny elementy s data-editable atributem
+        document.querySelectorAll('[data-editable]').forEach(el => {
+            el.setAttribute('contenteditable', 'true');
+        });
+
+        // Zobrazíme editační ikony pro obrázky a odkazy
+        document.querySelectorAll('.editable-image-wrapper .edit-icon').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+        document.querySelectorAll('.editable-link .edit-icon').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+
+        // Zobrazíme editační tlačítka u portfolio položek
+        document.querySelectorAll('.portfolio-item .edit-controls').forEach(controls => {
+            controls.classList.remove('hidden');
+        });
+        document.getElementById('add-portfolio-item-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro přidání portfolio položky
+        document.getElementById('add-link-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro přidání odkazu
+        document.getElementById('data-management').classList.remove('hidden'); // Zobrazíme sekci pro správu dat
+
+        // NOVINKA: Zobrazíme akční sloupce v tabulce odkazů
+        document.querySelectorAll('#links-table .edit-mode-only').forEach(el => {
+            el.style.display = 'table-cell';
+        });
+
+        // NOVINKA: Uložíme stav edit módu do localStorage
+        localStorage.setItem(EDIT_MODE_KEY, 'true');
+    }
+
+    function disableEditMode() {
+        isEditMode = false;
+        document.body.classList.remove('edit-mode');
+        document.getElementById('edit-mode-toggle-btn').textContent = 'Přejít do editace'; // Tlačítko pro návrat do editace
+        // Zobrazíme přihlašovací tlačítko, pokud není uživatel přihlášen
+        supabaseClient.auth.getSession().then(({ data: { session } }) => {
+            if (!session) {
+                document.getElementById('login-button').classList.remove('hidden');
+                document.getElementById('edit-mode-toggle-btn').classList.add('hidden'); // Skryjeme tlačítko pro ukončení editace
+            }
+        });
+
+
+        // Odebereme contenteditable atribut
+        document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+            el.removeAttribute('contenteditable');
+            // Uložení změn při vypnutí edit módu (pokud by se neukládalo přes "Uložit vše")
+            const id = el.dataset.editable;
+            if (id) {
+                 if (el.tagName === 'A' && el.classList.contains('editable-link')) {
+                    // Pro editable-link uložíme URL i text
+                    editableContentData[id] = { url: el.href, text: el.childNodes[0] ? el.childNodes[0].nodeValue.trim() : '' };
+                } else {
+                    editableContentData[id] = el.innerHTML;
+                }
+            }
+        });
+
+        // Skryjeme editační ikony
+        document.querySelectorAll('.editable-image-wrapper .edit-icon').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+        document.querySelectorAll('.editable-link .edit-icon').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+
+        // Skryjeme editační tlačítka u portfolio položek
+        document.querySelectorAll('.portfolio-item .edit-controls').forEach(controls => {
+            controls.classList.add('hidden');
+        });
+        document.getElementById('add-portfolio-item-btn').classList.add('hidden'); // Skryjeme tlačítko pro přidání portfolio položky
+        document.getElementById('add-link-btn').classList.add('hidden'); // Skryjeme tlačítko pro přidání odkazu
+        document.getElementById('data-management').classList.add('hidden'); // Skryjeme sekci pro správu dat
+
+        // NOVINKA: Skryjeme akční sloupce v tabulce odkazů
+        document.querySelectorAll('#links-table .edit-mode-only').forEach(el => {
+            el.style.display = 'none';
+        });
+
+        saveToLocalStorage(STORAGE_KEYS.EDITABLE_CONTENT, editableContentData); // Uložíme všechny provedené inline změny
+        // NOVINKA: Odebereme stav edit módu z localStorage
+        localStorage.removeItem(EDIT_MODE_KEY);
+    }
+
+    // --- Funkce pro načítání a skrývání indikátoru ---
     function showLoading(message = "Načítání...") {
         const loadingIndicatorElement = document.getElementById('loading-indicator');
         if (loadingIndicatorElement) {
@@ -1059,6 +1475,7 @@
         }
     }
 
+    // --- Správa dat (již existující) ---
     function setupDataManagement() {
         const dataManagementContainer = document.getElementById('data-management');
         if (dataManagementContainer) {
@@ -1083,37 +1500,60 @@
     }
 
     function saveAllDataToStorage() {
+        // Před uložením sesbíráme aktuální stav editovatelného obsahu
+        document.querySelectorAll('[data-editable]').forEach(el => {
+            const id = el.dataset.editable;
+            if (id) {
+                if (el.tagName === 'A' && el.classList.contains('editable-link')) {
+                    editableContentData[id] = { url: el.href, text: el.childNodes[0] ? el.childNodes[0].nodeValue.trim() : '' }; // Uložíme URL i text
+                } else {
+                    editableContentData[id] = el.innerHTML;
+                }
+            }
+        });
+
         let savedCount = 0;
         if (saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData)) savedCount++;
         if (saveToLocalStorage(STORAGE_KEYS.SAVED_CODES, savedCodesData)) savedCount++;
         if (saveToLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, externalLinksData)) savedCount++;
+        if (saveToLocalStorage(STORAGE_KEYS.EDITABLE_CONTENT, editableContentData)) savedCount++; // Uložíme i editovatelný obsah
         
-        const message = savedCount === 3 ? "Všechna data byla úspěšně uložena." : `Uloženo ${savedCount} ze 3 kategorií dat.`;
-        if (window.showAlertModal) showAlertModal(savedCount === 3 ? "Data uložena" : "Částečné uložení", message);
+        const message = savedCount === 4 ? "Všechna data byla úspěšně uložena." : `Uloženo ${savedCount} ze 4 kategorií dat.`;
+        if (window.showAlertModal) showAlertModal(savedCount === 4 ? "Data uložena" : "Částečné uložení", message);
         else alert(message);
     }
 
     async function handleClearAllData() {
         const confirmed = await (window.showConfirmModal ? 
-            showConfirmModal("Vymazat všechna data?", "Opravdu chcete vymazat všechna uložená data? Tato akce je nevratná!", { okText: 'Ano, vymazat', cancelText: 'Zrušit' }) :
+            showConfirmModal("Vymazat všechna data?", "Opravdu chcete vymazat všechna uložená data? Tato akce je nevratná! Zahrnuje i texty upravené na stránce.", { okText: 'Ano, vymazat', cancelText: 'Zrušit' }) :
             confirm("Opravdu chcete vymazat všechna uložená data?")
         );
         
         if (confirmed) {
-            clearLocalStorageData(); // Tato funkce již volá loadDataFromStorage a aktualizuje UI
-            updateGalleryDisplay();    // Pro jistotu explicitně
-            renderSavedCodesDisplay();
-            renderExternalLinks();
+            clearLocalStorageData(); 
         }
     }
 
     function exportData() {
+        // Před exportem sesbíráme aktuální stav editovatelného obsahu
+        document.querySelectorAll('[data-editable]').forEach(el => {
+            const id = el.dataset.editable;
+            if (id) {
+                 if (el.tagName === 'A' && el.classList.contains('editable-link')) {
+                    editableContentData[id] = { url: el.href, text: el.childNodes[0] ? el.childNodes[0].nodeValue.trim() : '' };
+                } else {
+                    editableContentData[id] = el.innerHTML;
+                }
+            }
+        });
+
         const exportObject = {
             galleryImages: galleryImagesData,
             savedCodes: savedCodesData,
             externalLinks: externalLinksData,
+            editableContent: editableContentData, // Exportujeme i editovatelný obsah
             exportDate: new Date().toISOString(),
-            version: "1.0"
+            version: "1.1" // Zvýšení verze kvůli novým datům
         };
         
         const dataStr = JSON.stringify(exportObject, null, 2);
@@ -1141,7 +1581,7 @@
             try {
                 const importedData = JSON.parse(e.target.result);
                 const confirmed = await (window.showConfirmModal ?
-                    showConfirmModal("Importovat data?", "Importování přepíše všechna současná data. Chcete pokračovat?", { okText: 'Ano, importovat', cancelText: 'Zrušit' }) :
+                    showConfirmModal("Importovat data?", "Importování přepíše všechna současná data (včetně textů na stránce). Chcete pokračovat?", { okText: 'Ano, importovat', cancelText: 'Zrušit' }) :
                     confirm("Importování přepíše data. Pokračovat?")
                 );
                 
@@ -1149,9 +1589,11 @@
                     if (importedData.galleryImages) galleryImagesData = importedData.galleryImages;
                     if (importedData.savedCodes) savedCodesData = importedData.savedCodes;
                     if (importedData.externalLinks) externalLinksData = importedData.externalLinks;
+                    if (importedData.editableContent) editableContentData = importedData.editableContent; // Importujeme editovatelný obsah
                     
                     saveAllDataToStorage(); // Uloží naimportovaná data
                     
+                    applyEditableContent(); // Aplikujeme naimportovaný textový obsah
                     updateGalleryDisplay();
                     renderSavedCodesDisplay();
                     renderExternalLinks();
@@ -1161,7 +1603,7 @@
                 }
             } catch (error) {
                 console.error('Chyba při importu:', error);
-                if(window.showAlertModal) showAlertModal("Chyba importu", "Nepodařilo se načíst data ze souboru.");
+                if(window.showAlertModal) showAlertModal("Chyba importu", "Nepodařilo se načíst data ze souboru. Zkontrolujte, zda je soubor platný JSON.");
                 else alert("Chyba importu dat.");
             }
         };
@@ -1169,6 +1611,7 @@
         event.target.value = ''; // Vyčištění inputu
     }
 
+    // --- Navigace a sekce (již existující) ---
     function setupNavigation() {
         const navLinks = document.querySelectorAll('.nav-container a.nav-link');
         navLinks.forEach(link => {
@@ -1210,6 +1653,7 @@
         }
     }
 
+    // --- HTML Editor (již existující) ---
     function setupHtmlEditor() {
         const editor = document.getElementById('html-editor');
         const preview = document.getElementById('html-preview');
@@ -1296,17 +1740,21 @@
         });
     }
 
+    // --- Galerie (již existující, s úpravami pro inline editaci) ---
     function setupGallery() {
-        // Přesunuto do HTML pro galerii: <input type="url" id="newImageUrl"...>, <button id="addImageUrlBtn"...>
         const addBtn = document.getElementById('addImageUrlBtn');
         const closeBtn = document.getElementById('close-modal-btn');
         const prevBtn = document.getElementById('prev-image-btn');
         const nextBtn = document.getElementById('next-image-btn');
+        const saveEditImageBtn = document.getElementById('save-edit-image-btn');
+        const cancelEditImageBtn = document.getElementById('cancel-edit-image-btn');
 
-        if(addBtn) addBtn.addEventListener('click', handleAddImageUrl); // Kontrola existence addBtn
+        if(addBtn) addBtn.addEventListener('click', handleAddImageUrl);
         if(closeBtn) closeBtn.addEventListener('click', closeImageModal);
         if(prevBtn) prevBtn.addEventListener('click', () => navigateImageModal(-1));
         if(nextBtn) nextBtn.addEventListener('click', () => navigateImageModal(1));
+        if(saveEditImageBtn) saveEditImageBtn.addEventListener('click', saveEditedImage);
+        if(cancelEditImageBtn) cancelEditImageBtn.addEventListener('click', () => hideModal(document.getElementById('edit-image-modal')));
     }
 
     async function handleAddImageUrl() {
@@ -1369,16 +1817,55 @@
             div.className = 'gallery-image-wrapper';
             div.innerHTML = `
                 <img src="${imgData.url}" alt="${imgData.name || 'Obrázek z galerie'}" onerror="this.onerror=null;this.src='https://placehold.co/250x200/cccccc/ffffff?text=Obrázek+nelze+načíst';this.alt='Obrázek nelze načíst';">
-                <button class="delete-img-btn" title="Smazat obrázek">&times;</button>
+                <button class="delete-img-btn ${isEditMode ? '' : 'hidden'}" title="Smazat obrázek">&times;</button>
+                <i class="fas fa-edit edit-icon ${isEditMode ? '' : 'hidden'}" data-image-id="${imgData.id}"></i>
             `;
             div.querySelector('img').addEventListener('click', () => openImageModal(index));
-            div.querySelector('.delete-img-btn').addEventListener('click', (e) => {
+            div.querySelector('.delete-img-btn')?.addEventListener('click', (e) => {
                 e.stopPropagation(); 
                 deleteGalleryImageLocally(imgData.id);
+            });
+            div.querySelector('.edit-icon')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                editImage(imgData.id);
             });
             container.appendChild(div);
         });
     }
+
+    let editingImageId = null; // Pro uložení ID obrázku, který se právě edituje
+    function editImage(imageId) {
+        editingImageId = imageId;
+        const image = galleryImagesData.find(img => img.id === imageId);
+        if (image) {
+            document.getElementById('edit-image-url').value = image.url;
+            document.getElementById('edit-image-name').value = image.name;
+            showModal(document.getElementById('edit-image-modal'));
+        }
+    }
+
+    function saveEditedImage() {
+        const url = document.getElementById('edit-image-url').value.trim();
+        const name = document.getElementById('edit-image-name').value.trim();
+
+        if (!isValidHttpUrl(url)) {
+            showAlertModal("Neplatná URL", "Zadejte platnou URL adresu obrázku (http:// nebo https://).");
+            return;
+        }
+
+        const index = galleryImagesData.findIndex(img => img.id === editingImageId);
+        if (index !== -1) {
+            galleryImagesData[index].url = url;
+            galleryImagesData[index].name = name;
+            saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData);
+            updateGalleryDisplay();
+            hideModal(document.getElementById('edit-image-modal'));
+            showAlertModal("Obrázek upraven", `Obrázek "${name}" byl úspěšně upraven.`);
+        } else {
+            showAlertModal("Chyba", "Obrázek k úpravě nebyl nalezen.");
+        }
+    }
+
 
     function openImageModal(index) {
         if (index < 0 || index >= galleryImagesData.length) return;
@@ -1406,6 +1893,7 @@
         }
     }
 
+    // --- Externí odkazy (již existující, s úpravami pro inline editaci) ---
     function renderExternalLinks() {
         const tableBody = document.querySelector('#links-table tbody');
         if (!tableBody) {
@@ -1417,13 +1905,13 @@
         if (externalLinksData.length === 0) {
             const row = tableBody.insertRow();
             const cell = row.insertCell();
-            cell.colSpan = 3; 
+            cell.colSpan = 4; // Změněno na 4, aby zahrnovalo sloupec Akce
             cell.textContent = 'Žádné externí odkazy k zobrazení.';
             cell.style.textAlign = 'center';
             return;
         }
 
-        externalLinksData.forEach(link => {
+        externalLinksData.forEach((link, index) => {
             const row = tableBody.insertRow();
             row.insertCell().innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
             
@@ -1436,9 +1924,82 @@
             titleCell.appendChild(anchor);
             
             row.insertCell().textContent = link.url;
+
+            const actionsCell = row.insertCell();
+            actionsCell.className = 'edit-mode-only'; // Skryjeme ve view módu
+            actionsCell.innerHTML = `
+                <button class="button btn-secondary edit-link-btn" data-index="${index}">Editovat</button>
+                <button class="button btn-danger delete-link-btn" data-index="${index}">Smazat</button>
+            `;
+            actionsCell.querySelector('.edit-link-btn')?.addEventListener('click', () => editLink(index));
+            actionsCell.querySelector('.delete-link-btn')?.addEventListener('click', () => deleteLink(index));
         });
+
+        // Zajistíme, že se editační tlačítka zobrazí/skryjí podle isEditMode
+        // Tuto logiku přesunula třída .edit-mode-only do CSS.
+        // Nyní jen stačí, aby .edit-mode-only měla správný display na základě isEditMode
     }
 
+    document.getElementById('add-link-btn')?.addEventListener('click', addLink);
+
+    function addLink() {
+        editingLinkIndex = -1; // Indikuje, že přidáváme nový odkaz
+        document.getElementById('edit-link-title').value = '';
+        document.getElementById('edit-link-url').value = '';
+        showModal(document.getElementById('edit-link-modal'));
+    }
+
+    let editingLinkIndex = null;
+    function editLink(index) {
+        editingLinkIndex = index;
+        const link = externalLinksData[index];
+        if (link) {
+            document.getElementById('edit-link-title').value = link.title;
+            document.getElementById('edit-link-url').value = link.url;
+            showModal(document.getElementById('edit-link-modal'));
+        }
+    }
+
+    function saveEditedLink() {
+        const title = document.getElementById('edit-link-title').value.trim();
+        const url = document.getElementById('edit-link-url').value.trim();
+
+        if (!title || !url || !isValidHttpUrl(url)) {
+            showAlertModal("Chybějící/neplatné údaje", "Zadejte platný název a URL (http:// nebo https://) pro odkaz.");
+            return;
+        }
+
+        if (editingLinkIndex === -1) { // Přidání nového odkazu
+            externalLinksData.push({ title, url });
+            showAlertModal("Odkaz přidán", `Odkaz "${title}" byl přidán.`);
+        } else { // Úprava existujícího
+            externalLinksData[editingLinkIndex] = { title, url };
+            showAlertModal("Odkaz upraven", `Odkaz "${title}" byl upraven.`);
+        }
+        
+        saveToLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, externalLinksData);
+        renderExternalLinks();
+        hideModal(document.getElementById('edit-link-modal'));
+    }
+    document.getElementById('save-edit-link-btn')?.addEventListener('click', saveEditedLink);
+    document.getElementById('cancel-edit-link-btn')?.addEventListener('click', () => hideModal(document.getElementById('edit-link-modal')));
+
+
+    async function deleteLink(index) {
+        const linkToDelete = externalLinksData[index];
+        const confirmed = await (window.showConfirmModal ?
+            showConfirmModal("Smazat odkaz?", `Opravdu smazat odkaz "${linkToDelete.title}"?`) :
+            confirm(`Smazat odkaz "${linkToDelete.title}"?`)
+        );
+        if (confirmed) {
+            externalLinksData.splice(index, 1);
+            saveToLocalStorage(STORAGE_KEYS.EXTERNAL_LINKS, externalLinksData);
+            renderExternalLinks();
+        }
+    }
+
+
+    // --- Modální okna (přepracované pro obecné použití) ---
     function showModal(modalElement) {
         if(modalElement) modalElement.classList.add('visible');
     }
@@ -1462,7 +2023,7 @@
                 codeTitleInputEl.value = '';
             } else {
                 if(window.showAlertModal) showAlertModal("Chybějící údaje", "Zadejte název a ujistěte se, že kód není prázdný.");
-                else alert("Chybí název nebo kód.");
+                else alert("Nelze uložit prázdný kód.");
             }
         });
     }
@@ -1482,7 +2043,7 @@
         };
     }
     if (!window.showConfirmModal) {
-         window.showConfirmModal = (title, message) => {
+        window.showConfirmModal = (title, message) => {
             console.warn("Custom showConfirmModal not fully initialized, using native confirm.");
             return new Promise((resolve) => {
                 resolve(confirm(`${title}\n\n${message}`));
@@ -1551,6 +2112,135 @@
     }
     
     window.showSection = showSection; // Pro případné volání z konzole
+
+
+    // --- Nové funkce pro editaci portfolia ---
+    let editingPortfolioItemId = null; // ID položky, kterou právě editujeme
+
+    function editPortfolioItem(itemId) {
+        editingPortfolioItemId = itemId;
+        const item = document.querySelector(`.portfolio-item[data-item-id="${itemId}"]`);
+        if (!item) return;
+
+        document.getElementById('edit-portfolio-title').value = item.querySelector(`[data-editable="${itemId}-title"]`).textContent.trim();
+        document.getElementById('edit-portfolio-desc-1').value = item.querySelector(`[data-editable="${itemId}-desc-1"]`).textContent.trim();
+        
+        const desc2Element = item.querySelector(`[data-editable="${itemId}-desc-2"]`);
+        document.getElementById('edit-portfolio-desc-2').value = desc2Element ? desc2Element.textContent.trim() : '';
+
+        const linkElement = item.querySelector(`[data-link-id="${itemId}-link"]`);
+        document.getElementById('edit-portfolio-link-text').value = linkElement ? linkElement.childNodes[0].nodeValue.trim() : '';
+        document.getElementById('edit-portfolio-link-url').value = linkElement ? linkElement.href : '';
+
+        document.getElementById('delete-portfolio-btn').classList.remove('hidden'); // Zobrazíme tlačítko pro smazání
+        showModal(document.getElementById('edit-portfolio-modal'));
+    }
+
+    document.getElementById('save-edit-portfolio-btn')?.addEventListener('click', saveEditedPortfolioItem);
+    document.getElementById('cancel-edit-portfolio-btn')?.addEventListener('click', () => hideModal(document.getElementById('edit-portfolio-modal')));
+    document.getElementById('delete-portfolio-btn')?.addEventListener('click', deletePortfolioItem);
+    document.getElementById('add-portfolio-item-btn')?.addEventListener('click', addPortfolioItem);
+
+    function addPortfolioItem() {
+        editingPortfolioItemId = null; // Indikuje, že přidáváme novou položku
+        document.getElementById('edit-portfolio-title').value = '';
+        document.getElementById('edit-portfolio-desc-1').value = '';
+        document.getElementById('edit-portfolio-desc-2').value = '';
+        document.getElementById('edit-portfolio-link-text').value = '';
+        document.getElementById('edit-portfolio-link-url').value = '';
+        document.getElementById('delete-portfolio-btn').classList.add('hidden'); // Skryjeme tlačítko pro smazání u nové položky
+        showModal(document.getElementById('edit-portfolio-modal'));
+    }
+
+    function saveEditedPortfolioItem() {
+        const title = document.getElementById('edit-portfolio-title').value.trim();
+        const desc1 = document.getElementById('edit-portfolio-desc-1').value.trim();
+        const desc2 = document.getElementById('edit-portfolio-desc-2').value.trim();
+        const linkText = document.getElementById('edit-portfolio-link-text').value.trim();
+        const linkUrl = document.getElementById('edit-portfolio-link-url').value.trim();
+
+        if (!title || !desc1) {
+            showAlertModal("Chybějící údaje", "Vyplňte prosím název a první popis položky portfolia.");
+            return;
+        }
+        if (linkUrl && !isValidHttpUrl(linkUrl)) {
+            showAlertModal("Neplatná URL", "Zadejte platnou URL adresu pro odkaz (http:// nebo https://).");
+            return;
+        }
+
+        const newId = editingPortfolioItemId || `portfolio-item-${Date.now()}`;
+        
+        editableContentData[`${newId}-title`] = title;
+        editableContentData[`${newId}-desc-1`] = desc1;
+        editableContentData[`${newId}-desc-2`] = desc2;
+        editableContentData[`${newId}-link-text`] = linkText;
+        editableContentData[`${newId}-link-url`] = linkUrl;
+
+        // Pokud je to nová položka, musíme ji přidat do DOM
+        if (!editingPortfolioItemId) {
+            const portfolioContainer = document.querySelector('.portfolio-items');
+            const newItemHtml = `
+                <div class="portfolio-item" data-item-id="${newId}" style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid #ddd; position: relative;">
+                    <h3 data-editable="${newId}-title">${title}</h3>
+                    <p data-editable="${newId}-desc-1">${desc1}</p>
+                    ${desc2 ? `<p data-editable="${newId}-desc-2">${desc2}</p>` : ''}
+                    <a href="${linkUrl || '#'}" class="button editable-link" data-link-id="${newId}-link" data-editable-link-text="${linkText || 'Zobrazit projekt &rarr;'}" target="_blank" rel="noopener noreferrer">
+                        ${linkText || 'Zobrazit projekt &rarr;'}<i class="fas fa-edit edit-icon ${isEditMode ? '' : 'hidden'}"></i>
+                    </a>
+                    <div class="edit-controls ${isEditMode ? '' : 'hidden'}">
+                        <button onclick="editPortfolioItem('${newId}')">Editovat</button>
+                    </div>
+                </div>
+            `;
+            portfolioContainer.insertAdjacentHTML('beforeend', newItemHtml);
+             // Aplikujeme contenteditable na nově přidané prvky, pokud jsme v edit módu
+            if (isEditMode) {
+                const newlyAddedItem = portfolioContainer.lastElementChild;
+                newlyAddedItem.querySelectorAll('[data-editable]').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                });
+            }
+
+            showAlertModal("Položka přidána", `Nová položka portfolia "${title}" byla přidána.`);
+        } else {
+            // Jen aktualizujeme existující prvky
+            applyEditableContent(); // Opětovně aplikujeme, aby se propsaly změny
+            showAlertModal("Položka upravena", `Položka portfolia "${title}" byla upravena.`);
+        }
+
+        saveToLocalStorage(STORAGE_KEYS.EDITABLE_CONTENT, editableContentData);
+        hideModal(document.getElementById('edit-portfolio-modal'));
+        editingPortfolioItemId = null; // Reset
+    }
+
+    async function deletePortfolioItem() {
+        if (!editingPortfolioItemId) return;
+
+        const confirmed = await (window.showConfirmModal ?
+            showConfirmModal("Smazat položku portfolia?", "Opravdu chcete smazat tuto položku z portfolia? Tato akce je nevratná!", { okText: 'Ano, smazat', cancelText: 'Zrušit' }) :
+            confirm("Opravdu chcete smazat tuto položku z portfolia? Tato akce je nevratná!")
+        );
+
+        if (confirmed) {
+            const itemElement = document.querySelector(`.portfolio-item[data-item-id="${editingPortfolioItemId}"]`);
+            if (itemElement) {
+                itemElement.remove();
+                // Také smažeme data z editableContentData
+                delete editableContentData[`${editingPortfolioItemId}-title`];
+                delete editableContentData[`${editingPortfolioItemId}-desc-1`];
+                delete editableContentData[`${editingPortfolioItemId}-desc-2`];
+                delete editableContentData[`${editingPortfolioItemId}-link-text`];
+                delete editableContentData[`${editingPortfolioItemId}-link-url`];
+                saveToLocalStorage(STORAGE_KEYS.EDITABLE_CONTENT, editableContentData);
+                showAlertModal("Položka smazána", "Položka portfolia byla úspěšně smazána.");
+            } else {
+                showAlertModal("Chyba", "Položka k smazání nebyla nalezena.");
+            }
+            hideModal(document.getElementById('edit-portfolio-modal'));
+            editingPortfolioItemId = null;
+        }
+    }
+
 </script>
 </body>
 </html>
