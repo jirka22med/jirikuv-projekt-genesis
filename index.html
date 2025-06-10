@@ -680,7 +680,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Tablet portrait a menší */
+/* Tablet portrait a menší - UPRAVENO PRO DVOUŘÁDKOVOU NAVIGACI */
 @media (max-width: 767px) {
     body {
         padding-top: 0;
@@ -694,6 +694,13 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     
     .nav-container {
         padding: 0 0.5rem;
+        /* KLÍČOVÁ ZMĚNA: Vytvoříme grid layout pro dvouřádkovou navigaci */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.5rem;
+        justify-items: center;
+        align-items: center;
     }
     
     header {
@@ -714,13 +721,18 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     nav {
         position: relative;
         top: 0;
-        padding: 0.5rem 0;
+        padding: 1rem 0; /* Zvětšený padding pro dvouřádkovou navigaci */
     }
 
     .nav-link {
-        padding: 0.5rem 0.8rem;
+        padding: 0.6rem 0.8rem;
         font-size: 0.85rem;
-        margin: 0.2rem;
+        margin: 0; /* Odstraníme margin, protože používáme grid gap */
+        width: 100%; /* Tlačítka vyplní celou šířku grid buňky */
+        text-align: center;
+        white-space: nowrap; /* Zabráníme zalomení textu */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Přidáme tři tečky při překročení */
     }
     
     main {
@@ -807,7 +819,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Mobilní zařízení */
+/* Mobilní zařízení - TAKÉ UPRAVENO PRO DVOUŘÁDKOVOU NAVIGACI */
 @media (max-width: 480px) {
     .container {
         padding: 0 0.25rem;
@@ -815,16 +827,24 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     
     .nav-container {
         padding: 0 0.25rem;
-        flex-direction: column;
-        gap: 0.25rem;
+        /* Zachováváme grid layout i pro mobilní zařízení */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.3rem;
+        justify-items: center;
+        align-items: center;
     }
     
     .nav-link {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.6rem;
-        margin: 0.1rem;
-        width: auto;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.4rem;
+        margin: 0;
+        width: 100%;
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     header {
@@ -837,6 +857,10 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     
     header p {
         font-size: 0.9rem;
+    }
+    
+    nav {
+        padding: 0.8rem 0; /* Přizpůsobený padding pro menší obrazovky */
     }
     
     section {
@@ -894,10 +918,36 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Velmi malé displeje */
+/* Velmi malé displeje - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ */
 @media (max-width: 320px) {
     .container {
         padding: 0 0.1rem;
+    }
+    
+    .nav-container {
+        padding: 0 0.1rem;
+        /* Grid layout zůstává i pro velmi malé displeje */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.2rem;
+        justify-items: center;
+        align-items: center;
+    }
+    
+    .nav-link {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.2rem;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    nav {
+        padding: 0.6rem 0;
     }
     
     header h1 {
@@ -911,13 +961,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     #gallery-container {
         grid-template-columns: 1fr;
     }
-    
-    .nav-link {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.5rem;
-    }
 }
-
     </style>
 </head>
 <body style="visibility: hidden;">
