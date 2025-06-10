@@ -658,7 +658,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     display: table-cell !important; /* Pro buňky tabulky */
 }
 
-/* VYLEPŠENÉ MEDIA QUERIES PRO PLNOU ŠÍŘKU */
+/* KOMPLETNÍ MEDIA QUERIES PRO PLNOU ŠÍŘKU */
 
 /* Tablet landscape a větší */
 @media (min-width: 768px) {
@@ -680,7 +680,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Tablet portrait a menší - UPRAVENO PRO DVOUŘÁDKOVOU NAVIGACI */
+/* Tablet portrait a menší - DVOUŘÁDKOVÁ NAVIGACE + VYLEPŠENÉ ODKAZY */
 @media (max-width: 767px) {
     body {
         padding-top: 0;
@@ -791,16 +791,50 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
         justify-content: flex-start;
     }
     
+    /* VYLEPŠENÉ EXTERNÍ ODKAZY */
     #links-table {
         font-size: 0.9rem;
         display: table;
         overflow-x: auto;
+        width: 100%;
+        table-layout: fixed; /* Fixní layout pro lepší kontrolu šířek */
     }
     
     #links-table th,
     #links-table td {
         padding: 0.5rem;
         white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 0; /* Umožní fungování ellipsis */
+    }
+    
+    /* Specifické šířky pro sloupce */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 30%; /* Název */
+        min-width: 80px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 50%; /* URL - největší prostor */
+        min-width: 120px;
+    }
+    
+    #links-table th:last-child,
+    #links-table td:last-child {
+        width: 20%; /* Popis */
+        min-width: 60px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
     }
     
     .modal-content {
@@ -819,7 +853,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Mobilní zařízení - TAKÉ UPRAVENO PRO DVOUŘÁDKOVOU NAVIGACI */
+/* Mobilní zařízení - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ + VYLEPŠENÉ ODKAZY */
 @media (max-width: 480px) {
     .container {
         padding: 0 0.25rem;
@@ -905,10 +939,50 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
         padding: 0.75rem;
     }
     
+    /* VYLEPŠENÉ EXTERNÍ ODKAZY PRO MOBIL */
+    #links-table {
+        font-size: 0.8rem;
+        display: table;
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
     #links-table th,
     #links-table td {
         padding: 0.25rem;
-        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 0; /* Umožní fungování ellipsis */
+    }
+    
+    /* Upravené šířky pro mobilní */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 25%; /* Název - menší */
+        min-width: 60px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 55%; /* URL - více prostoru */
+        min-width: 100px;
+    }
+    
+    #links-table th:last-child,
+    #links-table td:last-child {
+        width: 20%; /* Popis */
+        min-width: 50px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
     }
     
     .modal-nav button {
@@ -918,7 +992,7 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     }
 }
 
-/* Velmi malé displeje - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ */
+/* Velmi malé displeje - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ + SKRYTÝ POPIS U ODKAZŮ */
 @media (max-width: 320px) {
     .container {
         padding: 0 0.1rem;
@@ -960,6 +1034,52 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
     
     #gallery-container {
         grid-template-columns: 1fr;
+    }
+    
+    /* EXTRÉMNÍ OPTIMALIZACE ODKAZŮ PRO VELMI MALÉ DISPLEJE */
+    #links-table {
+        font-size: 0.75rem;
+        display: table;
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    #links-table th,
+    #links-table td {
+        padding: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 0; /* Umožní fungování ellipsis */
+    }
+    
+    /* Extrémně malé displeje - skryjeme popis úplně */
+    #links-table th:last-child,
+    #links-table td:last-child {
+        display: none; /* Skryje sloupec s popisem */
+    }
+    
+    /* Přerozdělíme prostor mezi název a URL */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 35%; /* Název */
+        min-width: 70px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 65%; /* URL - maximum prostoru */
+        min-width: 120px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
     }
 }
     </style>
