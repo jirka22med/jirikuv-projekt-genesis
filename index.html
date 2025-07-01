@@ -2117,6 +2117,23 @@ body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v 
 
 
 
+let galleryImagesData = []; // Zde bude uložená dynamická data galerie
+let currentModalImageIndex = 0; // Tvá původní proměnná pro aktuální index v modalu.
+
+// Důležité: Tuto funkci zavolej hned na začátku tvého skriptu, například v DOMContentLoaded
+function initializeGalleryData() {
+    const storedData = loadFromLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, null);
+    if (storedData && storedData.length > 0) {
+        galleryImagesData = storedData;
+    } else {
+        // Pokud není nic v localStorage, použij initialImageUrls
+        galleryImagesData = [...initialImageUrls]; // Vytvoří kopii, aby nedošlo k přímé modifikaci initialImageUrls
+        saveToLocalStorage(STORAGE_KEYS.GALLERY_IMAGES, galleryImagesData);
+    }
+    updateGalleryDisplay(); // Zavolej zobrazení galerie po inicializaci dat
+}
+
+
 function setupGallery() {
     const addBtn = document.getElementById('addImageUrlBtn');
     const closeBtn = document.getElementById('close-modal-btn');
@@ -2131,6 +2148,9 @@ function setupGallery() {
     if(nextBtn) nextBtn.addEventListener('click', () => navigateImageModal(1));
     if(saveEditImageBtn) saveEditImageBtn.addEventListener('click', saveEditedImage);
     if(cancelEditImageBtn) cancelEditImageBtn.addEventListener('click', () => hideModal(document.getElementById('edit-image-modal')));
+
+    // Zde by mělo dojít k inicializaci dat galerie při načtení stránky
+    initializeGalleryData();
 }
 
 async function handleAddImageUrl() {
@@ -2213,7 +2233,7 @@ function updateGalleryDisplay() {
                 <button class="delete-img-btn ${isEditMode ? '' : 'hidden'}" title="Smazat obrázek">&times;</button>
                 <i class="fas fa-edit edit-icon ${isEditMode ? '' : 'hidden'}" data-image-id="${imgData.id}"></i>
             `;
-        div.querySelector('img').addEventListener('click', () => openImageModal(index)); // Používáme původní index
+        div.querySelector('img').addEventListener('click', () => openImageModal(index)); // Používáme index pro otevření
         div.querySelector('.delete-img-btn')?.addEventListener('click', (e) => {
             e.stopPropagation(); 
             deleteGalleryImageLocally(imgData.id);
